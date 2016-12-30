@@ -58,4 +58,10 @@
             "file": "app/config/parameters.yml"
         }
     }
+	"scripts": {
+    "warmup": [
+        "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+        "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache"
+    ]
+}
 }
