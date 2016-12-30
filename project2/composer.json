@@ -45,7 +45,11 @@
         ],
         "post-update-cmd": [
             "@symfony-scripts"
-        ]
+        ],
+		"warmup": [
+			"Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache"
+			]
     },
     "config": {
         "bin-dir": "bin"
@@ -58,10 +62,4 @@
             "file": "app/config/parameters.yml"
         }
     }
-	"scripts": {
-    "warmup": [
-        "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-        "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache"
-    ]
-}
 }
