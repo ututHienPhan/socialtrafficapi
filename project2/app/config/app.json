@@ -1,0 +1,21 @@
+{
+  "success_url": "/",
+  "env": {
+    "SYMFONY_ENV": "prod",
+    "SYMFONY__DATABASE_DRIVER": "pdo_pgsql",
+    "SYMFONY__MAILER_TRANSPORT": "smtp",
+    "SYMFONY__MAILER_HOST": "your-mailer.com",
+    "SYMFONY__MAILER_USER": "your-mailer-username",
+    "SYMFONY__MAILER_PASSWORD": "your-mailer-password",
+    "SYMFONY__CORS_ALLOW_ORIGIN": "https://your-client-url.com",
+    "SYMFONY__LOCALE": "en",
+    "SYMFONY__SECRET": {
+      "generator": "secret"
+    }
+  }
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-php"
+    }
+  ]
+}
