@@ -1,0 +1,120 @@
+
+api_user:
+    type: rest
+    name_prefix:  api_
+    resource:     "API1Bundle:UserRest"
+
+api_update:
+    path : /edit
+    defaults:  { _controller: API1Bundle:UserRest:update }
+    methods: [PUT]
+
+api_moto:
+    type: rest
+    name_prefix: api_
+    resource: "API1Bundle:MotoRest"
+
+api_address_post:
+     path: /houses
+     defaults: {_controller: API1Bundle:HouseRest:postHouse}
+     methods: [POST]
+
+api_address_get:
+    path: /houses/{username}/{coordinate}
+    defaults: {_controller: API1Bundle:HouseRest:getHouse}
+    methods: [GET]
+
+api_report_accident:
+    type: rest
+    name_prefix: api_
+    resource: "API1Bundle:ReportAccident"
+
+api_get_accident:
+    path : /accidents/info
+    defaults:  { _controller: API1Bundle:AccidentRest:get }
+    methods: [POST]
+
+api_report_comfirm_accident:
+    path : /reportAccident/comfirm
+    defaults:  { _controller: API1Bundle:ReportAccident:comfirmAccident }
+    methods: [POST]
+
+api_accident:
+    type: rest
+    name_prefix: api_
+    resource: "API1Bundle:AccidentRest"
+
+api_signIn_token:
+    path : /signIn/token
+    defaults:  { _controller: API1Bundle:UserRest:signInByToken }
+    methods: [POST]
+
+api_get_accident_Local:
+    path : /accidents/local
+    defaults:  { _controller: API1Bundle:AccidentRest:getAccidentsLocal }
+    methods: [POST]
+
+api_userlogin:
+    path: /users/login
+    defaults: { _controller: API1Bundle:UserRest:userLogin}
+    methods: [POST]
+
+api_report_accident_handled:
+    path: /reportAccident/handled
+    defaults: { _controller: API1Bundle:ReportAccident:reportAccidentHandled}
+    methods: [POST]
+
+api_evaluate_accident:
+    path: /accident/evaluate
+    defaults: { _controller: API1Bundle:AccidentRest:getEvaluateAccurateAccident}
+    methods: [POST]
+
+api_report_fire:
+    type: rest
+    name_prefix: api_
+    resource: "API1Bundle:ReportFire"
+
+api_get_fire:
+    path : /fires/info
+    defaults:  { _controller: API1Bundle:FireRest:get }
+    methods: [POST]
+
+api_report_comfirm_fire:
+    path : /reportFire/comfirm
+    defaults:  { _controller: API1Bundle:ReportFire:comfirmFire }
+    methods: [POST]
+
+api_fire:
+    type: rest
+    name_prefix: api_
+    resource: "API1Bundle:FireRest"
+
+api_get_fire_Local:
+    path : /fires/local
+    defaults:  { _controller: API1Bundle:FireRest:getFireLocal }
+    methods: [POST]
+
+api_report_fire_handled:
+    path: /reportFire/handled
+    defaults: { _controller: API1Bundle:ReportFire:reportFireHandled}
+    methods: [POST]
+
+api_evaluate_fire:
+    path: /fire/evaluate
+    defaults: { _controller: API1Bundle:FireRest:getEvaluateAccurateFire}
+    methods: [POST]
+
+api_notification_accident:
+    path: /notification/accident
+    defaults: { _controller: API1Bundle:AccidentRest:getNotificationAccident}
+    methods: [POST]
+
+api_user_logout:
+    path : /user/logout
+    defaults:  { _controller: API1Bundle:UserRest:userLogout }
+    methods: [POST]
+
+api_test:
+    path: /test
+    defaults: { _controller: API1Bundle:ReportAccident:test}
+    methods: [POST]
