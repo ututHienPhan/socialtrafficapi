@@ -91,8 +91,8 @@ aws:
     credentials:
        # key: not-a-real-key
        # secret: "@@not-a-real-secret"
-        key: AKIAIM7WNCC3UHBSG7WA
-        secret: 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
+        key: AKIAIJU3PGYHNF4NRSTQ
+        secret: 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
     DynamoDb:
         region: us-west-2
        # endpoint: http://localhost:8000
