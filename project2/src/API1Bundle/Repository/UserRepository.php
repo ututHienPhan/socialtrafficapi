@@ -18,7 +18,8 @@ class UserRepository
 
 	// lay thong tin tai khoan theo email
     public function findByEmail ($email){
-       $response = $this->dynamodb->scan([
+
+	    $response = $this->dynamodb->scan([
 		   'TableName' => $this->tableName,
 		   'ExpressionAttributeValues' =>  [
 			   ':val1' => ['S' => $email]
@@ -30,7 +31,7 @@ class UserRepository
 		]*/
 
 		]);
-
+    
 		return $response;
     }
 
