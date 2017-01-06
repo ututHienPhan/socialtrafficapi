@@ -18,6 +18,7 @@ class UserRestController extends Controller
 
 		$formatResponse = new FormatResponse();
         $common = new Common();
+        echo "123";
         $user = $userLogic->getUserInfo($username);
         var_dump( $user);
         die;
