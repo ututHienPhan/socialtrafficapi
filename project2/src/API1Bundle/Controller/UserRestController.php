@@ -15,12 +15,7 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 class UserRestController extends Controller
 {
     public function getUserAction($username){
-        try{
-            $userLogic = new UserLogic($this->get('aws.dynamodb'));
-        }catch (Exception $e) {
-            echo $e->getMessage();
-        }
-echo 'die';die;
+        $userLogic = new UserLogic($this->get('aws.dynamodb'));
 		$formatResponse = new FormatResponse();
         $common = new Common();
         $user = $userLogic->getUserInfo($username);

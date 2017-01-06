@@ -37,7 +37,6 @@ class UserRepository
 
 	// lay thong tin tai khoan theo username
 	public function findByUsername ($username){
-        echo "123";
 		$response = $this->dynamodb->getItem([
 
 			'TableName' => $this->tableName,
@@ -45,7 +44,6 @@ class UserRepository
                 'username' => ['S' => $username]
             ]
 		]);
-        echo "1234";die;
 		return $response;
 	}
 
