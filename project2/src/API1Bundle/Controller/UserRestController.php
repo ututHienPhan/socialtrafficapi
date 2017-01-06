@@ -16,12 +16,10 @@ class UserRestController extends Controller
 
         echo "1234456";
 		$userLogic = new UserLogic($this->get('aws.dynamodb'));
-
-        echo "123445";
+        var_dump( $userLogic);
+        die;
 		$formatResponse = new FormatResponse();
-        echo "12";
         $common = new Common();
-        echo "123";
         $user = $userLogic->getUserInfo($username);
         var_dump( $user);
         die;
