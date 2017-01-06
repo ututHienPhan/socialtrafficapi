@@ -55,11 +55,16 @@
         "bin-dir": "bin"
     },
     "extra": {
-        "symfony-app-dir": "app",
-		"symfony-web-dir": "web",
+        //"symfony-app-dir": "app",
+		//"symfony-web-dir": "web",
         "symfony-assets-install": "relative",
         "incenteev-parameters": {
-            "file": "app/config/parameters.yml"
+            "file": "app/config/parameters.yml",
+			"env-map": {
+            "database_url": "DATABASE_URL",
+            "monolog_action_level": "LOG_LEVEL"
+        }
+
         }
     }
 }
