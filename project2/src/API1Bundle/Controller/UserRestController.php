@@ -4,25 +4,27 @@ namespace API1Bundle\Controller;
 
 use API1Bundle\Common\Common;
 use API1Bundle\Logic\TokenLogic;
+use Aws\DynamoDb\DynamoDbClient;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use API1Bundle\Logic\UserLogic;
 use API1Bundle\FormatResponse\FormatResponse;
 use API1Bundle\Utils\UserValidateHelper;
 use API1Bundle\Logic\DeviceTokenLogic;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 class UserRestController extends Controller
 {
     public function getUserAction($username){
-
-        var_dump( $this->get('aws.dynamodb'));
-        die;
-		$userLogic = new UserLogic($this->get('aws.dynamodb'));
-
+        try{
+            $userLogic = new UserLogic($this->get('aws.dynamodb'));
+        }catch (Exception $e) {
+            echo $e->getMessage();
+        }
+echo 'die';die;
 		$formatResponse = new FormatResponse();
         $common = new Common();
         $user = $userLogic->getUserInfo($username);
-        var_dump( $user);
-        die;
+
         if($user === FAlSE) {
             return $formatResponse->updateInfoResponse($common->RESULT_CODE_FAIL, $common->GET_INFO_USER_FAIL, null);
         }

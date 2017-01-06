@@ -45,7 +45,7 @@ class UserRepository
                 'username' => ['S' => $username]
             ]
 		]);
-        echo "1234";
+        echo "1234";die;
 		return $response;
 	}
 
