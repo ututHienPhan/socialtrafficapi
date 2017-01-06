@@ -31,19 +31,21 @@ class UserRepository
 		]*/
 
 		]);
-    
+
 		return $response;
     }
 
 	// lay thong tin tai khoan theo username
 	public function findByUsername ($username){
+        echo "123";
 		$response = $this->dynamodb->getItem([
+
 			'TableName' => $this->tableName,
             'Key' => [
                 'username' => ['S' => $username]
             ]
 		]);
-
+        echo "1234";
 		return $response;
 	}
 
