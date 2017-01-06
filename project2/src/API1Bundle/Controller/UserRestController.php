@@ -14,10 +14,10 @@ class UserRestController extends Controller
 {
     public function getUserAction($username){
 
-        echo "1234456";
-		$userLogic = new UserLogic($this->get('aws.dynamodb'));
         var_dump( $this->get('aws.dynamodb'));
         die;
+		$userLogic = new UserLogic($this->get('aws.dynamodb'));
+
 		$formatResponse = new FormatResponse();
         $common = new Common();
         $user = $userLogic->getUserInfo($username);
