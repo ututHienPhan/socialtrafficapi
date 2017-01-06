@@ -14,6 +14,7 @@ class UserRestController extends Controller
 {
     public function getUserAction($username){
 
+        echo "1234456";
 		$userLogic = new UserLogic($this->get('aws.dynamodb'));
 
         echo "123445";
