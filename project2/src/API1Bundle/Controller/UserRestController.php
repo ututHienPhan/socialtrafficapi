@@ -16,7 +16,9 @@ class UserRestController extends Controller
 
 		$userLogic = new UserLogic($this->get('aws.dynamodb'));
 
+        echo "123445";
 		$formatResponse = new FormatResponse();
+        echo "12";
         $common = new Common();
         echo "123";
         $user = $userLogic->getUserInfo($username);
