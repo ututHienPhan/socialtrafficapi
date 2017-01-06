@@ -3,8 +3,6 @@
 namespace API1Bundle\Logic;
 
 use API1Bundle\Repository\UserRepository;
-use Symfony\Component\Config\Definition\Exception\Exception;
-use Symfony\Component\Validator\Constraints\True;
 
 class UserLogic
 {
