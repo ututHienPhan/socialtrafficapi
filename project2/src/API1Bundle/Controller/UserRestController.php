@@ -13,9 +13,11 @@ use API1Bundle\Logic\DeviceTokenLogic;
 class UserRestController extends Controller
 {
     public function getUserAction($username){
-	
+	var_dump($this->get('aws.dynamodb'));
+        die;
 		$userLogic = new UserLogic($this->get('aws.dynamodb'));
-        $formatResponse = new FormatResponse();
+
+		$formatResponse = new FormatResponse();
         $common = new Common();
         $user = $userLogic->getUserInfo($username);
         if($user === FAlSE) {
