@@ -5,6 +5,9 @@
  * Date: 05/12/2016
  * Time: 10:08 SA
  */
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * Token
