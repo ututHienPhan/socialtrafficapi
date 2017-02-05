@@ -26,11 +26,12 @@ class MotoRestController extends Controller {
         $motoLogic = new MotoLogic($this->get('aws.dynamodb'));
         $tokenLogic = new TokenLogic($this->get('aws.dynamodb'));
         $datas = $this->get('request')->getContent();
+        var_dump("123");die;
         $array = json_decode($datas, true);
         $token = $array["token"];
         $licenseplate = $array["licenseplate"];
         $ownername = $array["ownername"];
-        var_dump("123");die;
+
         if(!$valid->validationIdToken($token) || !$valid->validationOwnername($ownername) ||
             !$valid->validationLicenseplate($licenseplate))
             return $registerResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->REPORT_ACCIDENT_ERROR_REQUEST);
