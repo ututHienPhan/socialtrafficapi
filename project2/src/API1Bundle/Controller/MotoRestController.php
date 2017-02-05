@@ -19,7 +19,7 @@ class MotoRestController extends Controller {
 
     // api dang ki thong tin xe
     public function postMotoAction() {
-
+        var_dump("123");
         $common = new Common();
         $registerResponse = new FormatResponse();
         $valid = new UserValidateHelper();
