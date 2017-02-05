@@ -37,6 +37,8 @@ class MotoRepository
 
     // Tao tai thong tin dang ki xe moi
     public function newMoto($username, $licenseplate, $ownername) {
+
+        var_dump("123");
         $response = $this->dynamodb->putItem([
             'TableName' => $this->tableName,
             'Item' => [
