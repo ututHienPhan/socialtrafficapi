@@ -23,8 +23,9 @@ class MotoRestController extends Controller {
         $common = new Common();
         $registerResponse = new FormatResponse();
         $valid = new UserValidateHelper();
-        var_dump("123");die;
+
         $motoLogic = new MotoLogic($this->get('aws.dynamodb'));
+        var_dump("123");die;
         $tokenLogic = new TokenLogic($this->get('aws.dynamodb'));
         $datas = $this->get('request')->getContent();
 
