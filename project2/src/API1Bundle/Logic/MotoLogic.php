@@ -17,6 +17,7 @@ class MotoLogic
 
     function __construct($dynamodb)
     {
+        var_dump("123");die;
         $this->motoRepository = new MotoRepository($dynamodb);
     }
 

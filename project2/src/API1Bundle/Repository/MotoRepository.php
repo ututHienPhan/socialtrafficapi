@@ -19,7 +19,7 @@ class MotoRepository
     function __construct($dynamodb)
     {
         $this->dynamodb = $dynamodb;
-        $this->tableName = 'user';
+        $this->tableName = 'motor';
     }
 
     // lay thong tin moto theo ten dang nhap nguoi dang ki va bang so xe
