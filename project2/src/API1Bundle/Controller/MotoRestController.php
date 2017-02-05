@@ -19,7 +19,7 @@ class MotoRestController extends Controller {
 
     // api dang ki thong tin xe
     public function postMotoAction() {
-        var_dump("123");die;
+        
         $common = new Common();
         $registerResponse = new FormatResponse();
         $valid = new UserValidateHelper();
@@ -30,6 +30,7 @@ class MotoRestController extends Controller {
         $token = $array["token"];
         $licenseplate = $array["licenseplate"];
         $ownername = $array["ownername"];
+        var_dump("123");die;
         if(!$valid->validationIdToken($token) || !$valid->validationOwnername($ownername) ||
             !$valid->validationLicenseplate($licenseplate))
             return $registerResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->REPORT_ACCIDENT_ERROR_REQUEST);
