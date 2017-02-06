@@ -163,12 +163,12 @@ class ReportFireController extends Controller
             $resultComf = $reportfirelogic->getReportFireByCoordinate($status, $latitude, $longitude);
 
             //arr username da dang ki nha gap hoa hoan
-            $arrUser = $houseLogic->getUsernames($latitude, $longitude));
+            $arrUser = $houseLogic->getUsernames($latitude, $longitude);
 
             if($resultComf) { // hoa hoan da duoc report roi
                 $id_fire = $resultComf['id']['S'];
-                $latitude = $resultComf['latitude']["N"];
-                $longitude = $resultComf['longitude']["N"];
+                $latitude = $resultComf['latitude']['N'];
+                $longitude = $resultComf['longitude']['N'];
                 $address = $resultComf['address']['S'];
                 //xu ly vao phan xac nhan tai nan
                 $reponse =  $reportfirelogic->comfirmFire($username, $latitude, $longitude, '1', '0', $status, $time, $id_fire);
