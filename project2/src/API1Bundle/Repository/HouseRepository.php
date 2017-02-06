@@ -58,16 +58,16 @@ class HouseRepository
         $response = $this->dynamodb->scan([
             'TableName' => $this->tableName,
             'ExpressionAttributeNames' => [
-                '#username' => 'username'
-               /* '#latitude' => 'latitude',
-                '#longitude' => 'longitude' */
+                '#username' => 'username',
+                '#latitude' => 'latitude'
+                /*'#longitude' => 'longitude' */
             ],
             'ExpressionAttributeValues' =>  [
-                ':val1' => ['S' => $username]
-               /* ':val2' => ['N' => $latitude],
-                ':val3' => ['N' => $longitude] */
+                ':val1' => ['S' => $username],
+                ':val2' => ['N' => $latitude]
+               /* ':val3' => ['N' => $longitude] */
             ],
-            'FilterExpression' => '#username = :val1', /*AND #latitude = :val2 AND #longitude = :val3', */
+            'FilterExpression' => '#username = :val1 AND #latitude = :val2', /*AND #longitude = :val3', */
             'Select' => 'ALL_ATTRIBUTES'
         ]);
         var_dump("123"); die;
