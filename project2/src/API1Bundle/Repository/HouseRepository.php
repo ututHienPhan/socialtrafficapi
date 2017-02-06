@@ -76,7 +76,7 @@ class HouseRepository
 
     public function newAddress($id, $username, $latitude, $longitude, $address, $ownername) {
 
-        var_dump('$latitude'); die;
+        var_dump((string)$latitude); die;
         $response = $this->dynamodb->putItem([
             'TableName' => $this->tableName,
             'Item' => [
