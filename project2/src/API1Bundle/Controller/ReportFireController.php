@@ -163,7 +163,8 @@ class ReportFireController extends Controller
             $resultComf = $reportfirelogic->getReportFireByCoordinate($status, $latitude, $longitude);
 
             //arr username da dang ki nha gap hoa hoan
-            $arrUser = $houseLogic->getUsernames($latitude, $longitude);
+            $arrUser = $houseLogic->getUsernames($latitude, $longitude));
+
             if($resultComf) { // hoa hoan da duoc report roi
                 $id_fire = $resultComf['id']['S'];
                 $latitude = $resultComf['latitude']["N"];
@@ -179,6 +180,7 @@ class ReportFireController extends Controller
                     return $registerResponse->createResponseRegister($common->RESULT_CODE_SUCCESS, $common->REPORT_FIRE_SUCCESSFULLY );
                 return $registerResponse->createResponseRegister($common->RESULT_CODE_SUCCESS, $common->PUSH_NOTIFICATION_FAIL);
             }
+            var_dump('124');die;
             // hoa hoan chua duoc report
             $response = $reportfirelogic->insertReportFire($username, $latitude, $longitude, $timestart, $status,
                 $description, $image, $address, $level);
