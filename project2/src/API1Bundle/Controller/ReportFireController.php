@@ -176,11 +176,12 @@ class ReportFireController extends Controller
                     return $registerResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->REPORT_FIRE_FAIL);
                 //push thong bao tai nan giao thong
                 $result = $reportfirelogic->pushNotify($address, $latitude, $longitude, $arrUser);
+                var_dump('124');die;
                 if($result)
                     return $registerResponse->createResponseRegister($common->RESULT_CODE_SUCCESS, $common->REPORT_FIRE_SUCCESSFULLY );
                 return $registerResponse->createResponseRegister($common->RESULT_CODE_SUCCESS, $common->PUSH_NOTIFICATION_FAIL);
             }
-            var_dump('124');die;
+            
             // hoa hoan chua duoc report
             $response = $reportfirelogic->insertReportFire($username, $latitude, $longitude, $timestart, $status,
                 $description, $image, $address, $level);
