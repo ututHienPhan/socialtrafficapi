@@ -36,6 +36,7 @@ class HouseRestController extends Controller
         $formatResponse = new FormatResponse();
         $valid = new UserValidateHelper();
         $tokenLogic = new TokenLogic($this->get('aws.dynamodb'));
+        var_dump("123");die;
         $houseLogic = new HouseLogic($this->get('aws.dynamodb'));
         $data = $this->get('request')->getContent();
         $array = json_decode($data, true);
