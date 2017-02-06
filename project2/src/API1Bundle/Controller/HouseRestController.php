@@ -9,6 +9,7 @@ namespace API1Bundle\Controller;
 
 use API1Bundle\Common\Common;
 use API1Bundle\Logic\HouseLogic;
+use Aws\DynamoDb\DynamoDbClient;
 use FOS\RestBundle\View\View;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use API1Bundle\FormatResponse\FormatResponse;
