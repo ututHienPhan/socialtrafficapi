@@ -72,12 +72,13 @@ class ReportFireLogic
         $resultInsert = $this->reportFireRepository->comfirmFire($username, $latitude, $longitude, $agree, $disagree, $status, $time, $id_fire, $id);
         if ($resultInsert === FALSE)
             return FALSE;
-        var_dump("123");
         $resultAcc = $this->fireRepository->getFireById($id_fire);
-        var_dump("1234");;die;
         $agree = $agree + $resultAcc->get('Item')['agree']['N'];
         $disagree = $disagree + $resultAcc->get('Item')['disagree']['N'];
+        var_dump($agree);
+        var_dump($disagree);
         $reponse = $this->fireRepository->updateFireByComfirm($id_fire, $agree, $disagree);
+        var_dump(123);die;
         return $reponse;
     
     }
