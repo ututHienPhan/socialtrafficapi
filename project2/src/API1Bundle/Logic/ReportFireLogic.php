@@ -74,7 +74,7 @@ class ReportFireLogic
             return FALSE;
         
         $resultFire = $this->fireRepository->getFireById($id_fire);
-        var_dump("0122");die;
+        var_dump($resultFire);die;
         return $resultFire;
         $agree = $agree + $resultFire->get('Item')['agree']['N'];
         $disagree = $disagree + $resultFire->get('Item')['disagree']['N'];
