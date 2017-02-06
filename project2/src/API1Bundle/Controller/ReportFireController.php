@@ -84,7 +84,9 @@ class ReportFireController extends Controller
         $common = new Common();
         $registerResponse = new FormatResponse();
         $valid = new UserValidateHelper();
+        var_dump('100');
         $tokenLogic = new TokenLogic($this->get('aws.dynamodb'));
+        var_dump("123");die;
         $data = $this->get('request')->getContent();
         $array = json_decode($data, true);
         $token = $array['token'];
@@ -121,6 +123,7 @@ class ReportFireController extends Controller
         }
     }
 
+    // api thong bao hoa hoan
     public function postReportFireAction()
     {
         $common = new Common();
