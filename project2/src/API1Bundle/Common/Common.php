@@ -39,7 +39,7 @@ class Common
     public $REPORT_ACCIDENT_SUCCESSFULLY = 'Report accident successfully';
     public $REPORT_ACCIDENT_FAIL = 'Report accident fail';
     public $REPORT_ACCIDENT_ERROR_REQUEST = 'Error input';
-    public $REPORT_ACCIDENT_ERROR_NOT_FOUND = 'Not found in database';
+    public $REPORT_ACCIDENT_ERROR_NOT_FOUND = 'Not found token in database';
 
     //comfirm accident
     public $COMFIRM_ACCIDENT_SUCCESSULLY = 'Comfirm accident successfully';
