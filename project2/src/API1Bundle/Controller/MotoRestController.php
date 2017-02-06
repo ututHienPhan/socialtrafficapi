@@ -9,6 +9,7 @@
 namespace API1Bundle\Controller;
 
 use API1Bundle\Common\Common;
+use Aws\DynamoDb\DynamoDbClient;
 use API1Bundle\Logic\MotoLogic;
 use API1Bundle\Logic\TokenLogic;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

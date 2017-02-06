@@ -9,7 +9,6 @@
 namespace API1Bundle\Logic;
 
 use API1Bundle\Repository\MotoRepository;
-use Symfony\Component\Validator\Constraints\True;
 
 class MotoLogic
 {
