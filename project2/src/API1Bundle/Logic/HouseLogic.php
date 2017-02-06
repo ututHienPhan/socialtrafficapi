@@ -43,7 +43,7 @@ class HouseLogic
         return $response;
     }
 
-    public function getUsernames($licenseplate) {
+    public function getUsernames($latitude, $longitude) {
 
         $response = $this->houseRepository->getAddressByCoordinate($latitude, $longitude);
         if($response === FALSE)
