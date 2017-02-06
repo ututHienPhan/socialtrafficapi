@@ -34,6 +34,7 @@ class HouseRepository
 
     public function getAddressByCoordinate($latitude, $longitude) {
 
+        var_dump("123");die;
         $response = $this->dynamodb->scan([
             'TableName' => $this->tableName,
             'ExpressionAttributeNames' => [
