@@ -74,11 +74,12 @@ class ReportFireLogic
             return FALSE;
 
         $resultAcc = $this->fireRepository->getFireById($id_fire);
-        var_dump('123');die;
+
         try {
             $agree = $agree + $resultAcc->get('Item')['agree']['N'];
             $disagree = $disagree + $resultAcc->get('Item')['disagree']['N'];
             $reponse = $this->fireRepository->updateFireByComfirm($id_fire, $agree, $disagree);
+            var_dump('123');die;
             return $reponse;
         } catch (Exception $e) {
             $this->reportFireRepository->delete($id);
