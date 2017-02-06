@@ -170,7 +170,7 @@ class ReportFireController extends Controller
                 $longitude = $resultComf['longitude']['N'];
                 $address = $resultComf['address']['S'];
                 //xu ly vao phan xac nhan tai nan
-                var_dump('124');die;
+                
                 $reponse =  $reportfirelogic->comfirmFire($username, $latitude, $longitude, '1', '0', $status, $time, $id_fire);
 
                 if($reponse === FALSE)
