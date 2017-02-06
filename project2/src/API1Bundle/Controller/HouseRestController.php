@@ -44,7 +44,7 @@ class HouseRestController extends Controller
         $longitude = $array["longitude"];
         $address = $array["address"];
         $ownername = $array["ownername"];
-
+        var_dump("123");die;
         if(!$valid->validationIdToken($token))
             return $formatResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->REGISTER_ADDRESS_TOKEN_ERROR);
         $username = $tokenLogic->getUsername($token);
