@@ -64,7 +64,7 @@ class HouseRepository
             ],
             'ExpressionAttributeValues' =>  [
                 ':val1' => ['S' => $username],
-                ':val2' => ['S' => (string)$latitude],
+                ':val2' => ['N' => (string)$latitude],
                 ':val3' => ['N' => (string)$longitude]
             ],
             'FilterExpression' => '#username = :val1 AND #latitude = :val2 AND #longitude = :val3',
