@@ -73,6 +73,7 @@ class ReportFireLogic
         if ($resultInsert === FALSE)
             return FALSE;
         $resultFire = $this->fireRepository->getFireById($id_fire);
+        var_dump("0122");
         return $resultFire;
         $agree = $agree + $resultFire->get('Item')['agree']['N'];
         $disagree = $disagree + $resultFire->get('Item')['disagree']['N'];
