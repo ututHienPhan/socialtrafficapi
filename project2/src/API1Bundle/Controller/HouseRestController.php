@@ -47,12 +47,12 @@ class HouseRestController extends Controller
         if(!$valid->validationIdToken($token))
             return $formatResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->REGISTER_ADDRESS_TOKEN_ERROR);
         $username = $tokenLogic->getUsername($token);
-        var_dump("123");die;
         if($username === FALSE)
             return $formatResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->REGISTER_ADDRESS_FAIL);
         else if($username === NULL)
             return $formatResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->REGISTER_ADDRESS_TOKEN_ERROR_NOT_FOUND);
         else {
+            var_dump("123");die;
             if (!$valid->validationLatitude($latitude) || !$valid->validationAddress($address) ||
                 !$valid->validationLongitude($longitude) || !$valid->validationOwnername($ownername)) {
                 return $formatResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->REGISTER_ADDRESS_ERROR_INPUT);
