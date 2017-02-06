@@ -81,8 +81,8 @@ class HouseRepository
             'Item' => [
                 'id' => ['S' => $id],
                 'username' => ['S'  => $username],
-                'latitude' => ['N' => $latitude],
-                'longitude' => ['N' => $longitude],
+                'latitude' => ['S' => $latitude],
+                'longitude' => ['S' => $longitude],
                 'address' => ['S' => $address],
                 'ownername' => ['S'  => $ownername]
             ]
