@@ -114,11 +114,11 @@ class ReportFireLogic
 
 
         $number = Count($arruser);
+        return $number;
         $push = new Push();
         for($i = 0; $i < $number; $i++) {
             $username = $arruser[$i]['username']['S'];
             $result = $this->deviceTokenRepository->findByUsername($username);
-            return $result;
             if($result === FALSE)
                 return $result;
             $numberdevice = Count($result);
