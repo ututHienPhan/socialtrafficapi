@@ -57,11 +57,10 @@ class HouseRestController extends Controller
                 return $formatResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->REGISTER_ADDRESS_ERROR_INPUT);
             }
 
-           /* $result = $houseLogic->getHouseInfoByUsername($latitude, $longitude, $username);
-            return $result; //them
+           $result = $houseLogic->getHouseInfoByUsername($latitude, $longitude, $username);
             if($result->get('Count') > 0) {
                 return $formatResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->REGISTER_ADDRESS_EXISTED);
-            } else { */
+            } else { 
                 $id = uniqid();
                 $houseAddress = $houseLogic->insertNewAddress($id, $username, $latitude, $longitude, $address, $ownername);
                 if($houseAddress === FALSE)

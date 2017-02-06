@@ -64,10 +64,10 @@ class HouseRepository
             ],
             'ExpressionAttributeValues' =>  [
                 ':val1' => ['S' => $username],
-                ':val2' => ['S' => $latitude]
-               /* ':val3' => ['N' => $longitude] */
+                ':val2' => ['S' => (string)$latitude],
+                ':val3' => ['N' => (string)$longitude]
             ],
-            'FilterExpression' => '#username = :val1 AND #latitude = :val2', /*AND #longitude = :val3', */
+            'FilterExpression' => '#username = :val1 AND #latitude = :val2 AND #longitude = :val3',
             'Select' => 'ALL_ATTRIBUTES'
         ]);
         var_dump("123"); die;
@@ -87,7 +87,6 @@ class HouseRepository
                 'ownername' => ['S'  => $ownername]
             ]
         ]);
-        var_dump("123");die;
         return $response;
     }
 }
