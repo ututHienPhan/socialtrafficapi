@@ -66,7 +66,6 @@ class FireRepository
                 'id' => ['S' => $id]
             ]
         ]);
-        var_dump('123');die;
         return $response;
     }
 
