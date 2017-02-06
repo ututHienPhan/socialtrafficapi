@@ -107,6 +107,7 @@ class ReportFireRepository
     public function comfirmFire($username, $latitude, $longitude, $agree, $disagree, $status, $time, $id_fire, $id)
     {
 
+var_dump('124');die;
         $response = $this->dynamodb->putItem([
             'TableName' => $this->tableName,
             'Item' => [

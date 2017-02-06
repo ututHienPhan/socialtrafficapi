@@ -73,7 +73,7 @@ class ReportFireLogic
             $status, $time, $id_fire, $id);
         if ($resultInsert === FALSE)
             return FALSE;
-        var_dump('124');die;
+        
         $resultAcc = $this->fireRepository->getFireById($id_fire);
         try {
             $agree = $agree + $resultAcc->get('Item')['agree']['N'];
