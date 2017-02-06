@@ -106,6 +106,15 @@ class ReportFireRepository
     // Them dong du lieu vao bang report_fire va cap nhap lai bang fire
     public function comfirmFire($username, $latitude, $longitude, $agree, $disagree, $status, $time, $id_fire, $id)
     {
+        var_dump($username);
+        var_dump($latitude);
+        var_dump($longitude);
+        var_dump($agree);
+        var_dump($disagree);
+        var_dump($status);
+        var_dump($time);
+        var_dump($id_fire);
+        var_dump($id);die;
         $response = $this->dynamodb->putItem([
             'TableName' => $this->tableName,
             'Item' => [

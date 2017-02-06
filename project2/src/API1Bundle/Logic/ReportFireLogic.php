@@ -69,11 +69,10 @@ class ReportFireLogic
     public function comfirmFire($username, $latitude, $longitude, $agree, $disagree, $status, $time, $id_fire)
     {
         $id = uniqid();
-        $resultInsert = $this->reportFireRepository->comfirmFire($username, $latitude, $longitude, $agree, $disagree,
-            $status, $time, $id_fire, $id);
+        $resultInsert = $this->reportFireRepository->comfirmFire($username, $latitude, $longitude, $agree, $disagree, $status, $time, $id_fire, $id);
         if ($resultInsert === FALSE)
             return FALSE;
-        
+
         $resultAcc = $this->fireRepository->getFireById($id_fire);
         try {
             $agree = $agree + $resultAcc->get('Item')['agree']['N'];
