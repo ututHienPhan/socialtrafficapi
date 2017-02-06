@@ -81,10 +81,10 @@ class HouseRepository
             'Item' => [
                 'id' => ['S' => $id],
                 'username' => ['S'  => $username],
-                'latitude' => ['S' => $latitude],
-                'longitude' => ['S' => $longitude],
-                'address' => ['S' => $address],
-                'ownername' => ['S'  => $ownername]
+                'latitude' => ['N' => $latitude],
+                'longitude' => ['N' => $longitude]
+               /* 'address' => ['S' => $address],
+                'ownername' => ['S'  => $ownername] */
             ]
         ]);
         var_dump("123");die;
