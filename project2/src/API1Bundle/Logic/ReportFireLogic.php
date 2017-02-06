@@ -112,7 +112,7 @@ class ReportFireLogic
      //ham push thong bao hoa hoan
     public function pushNotify($address, $latitude, $longitude, $arruser) {
 
-
+        var_dump(123);die;
         $number = Count($arruser);
         $push = new Push();
         for($i = 0; $i < $number; $i++) {

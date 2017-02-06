@@ -176,9 +176,8 @@ class ReportFireController extends Controller
                 if($reponse === FALSE)
                     return $registerResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->REPORT_FIRE_FAIL);
                 //push thong bao tai nan giao thong
-                
+
                 $result = $reportfirelogic->pushNotify($address, $latitude, $longitude, $arrUser);
-                var_dump('123');die;
                 if($result)
                     return $registerResponse->createResponseRegister($common->RESULT_CODE_SUCCESS, $common->REPORT_FIRE_SUCCESSFULLY );
                 return $registerResponse->createResponseRegister($common->RESULT_CODE_SUCCESS, $common->PUSH_NOTIFICATION_FAIL);
