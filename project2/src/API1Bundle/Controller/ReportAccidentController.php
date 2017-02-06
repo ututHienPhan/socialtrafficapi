@@ -189,6 +189,19 @@ class ReportAccidentController extends Controller {
     }
 
 
+    public function testAction()
+    {
+        // get the mailer first (mandatory to initialize Swift Mailer)
+        $mailer = $this->get('mailer');
 
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Hello Email')
+            ->setFrom('warningtravelcity@gmail.com')
+            ->setTo('hien4687@gmail.com')
+            ->setBody('hello', array('name' => 'hien de thuong'))
+        ;
+        $mailer->send($message);
+        return "yes";
+    }
 
 }

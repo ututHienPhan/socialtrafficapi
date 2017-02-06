@@ -48,8 +48,8 @@ class ReportAccidentRepository {
             ],
             'ExpressionAttributeValues' =>  [
                 ':val1' => ['S' => $status],
-                ':val2' => ['N' => $latitude],
-                ':val3' => ['N' => $longitude]
+                ':val2' => ['N' => (string)$latitude],
+                ':val3' => ['N' => (string)$longitude]
             ],
             'FilterExpression' => '#statusA = :val1 AND #latitude = :val2 AND #longitude = :val3',
             'Select' => 'ALL_ATTRIBUTES'
@@ -67,8 +67,8 @@ class ReportAccidentRepository {
             'Item' => [
                 'id' => ['S'  => $id],
                 'username' => ['S' => $username],
-                'latitude' => ['N'  => $latitude],
-                'longitude' => ['N'  => $longitude],
+                'latitude' => ['N'  => (string)$latitude],
+                'longitude' => ['N'  => (string)$longitude],
                 'licenseplate' => ['S' => $licenseplate],
                 'time' => ['S'  => $timestart],
                 'levelA' => ['S' => $level],
@@ -112,10 +112,10 @@ class ReportAccidentRepository {
             'Item' => [
                 'id' => ['S'  => $id],
                 'username' => ['S' => $username],
-                'latitude' => ['N'  => $latitude],
-                'longitude' => ['N'  => $longitude],
-                'agree' => ['N' => $agree],
-                'disagree' => ['N'  => $disagree],
+                'latitude' => ['N'  => (string)$latitude],
+                'longitude' => ['N'  => (string)$longitude],
+                'agree' => ['N' => (string)$agree],
+                'disagree' => ['N'  => (string)$disagree],
                 'time' => ['S' => $time],
                 'statusA' => ['S'  => $status],
                 'id_accident' => ['S' => $id_accident]
@@ -146,8 +146,8 @@ class ReportAccidentRepository {
             'Item' => [
                 'id' => ['S' => $id],
                 'username' => ['S' => $username],
-                'latitude' => ['N' => $latitude],
-                'longitude' => ['N' => $longitude],
+                'latitude' => ['N' => (string)$latitude],
+                'longitude' => ['N' => (string)$longitude],
                 'time' => ['S' => $time],
                 'statusA' => ['S' => $status],
                 'id_accident' => ['S' => $id_accident]
