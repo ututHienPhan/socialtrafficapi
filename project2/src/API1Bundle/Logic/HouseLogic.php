@@ -42,4 +42,19 @@ class HouseLogic
         $response = $this->houseRepository->newAddress($id, $username, $latitude, $longitude, $address, $ownername);
         return $response;
     }
+
+    public function getUsernames($licenseplate) {
+
+        $response = $this->houseRepository->getAddressByCoordinate($latitude, $longitude);
+        if($response === FALSE)
+            return FALSE;
+        $numberUser = $response->get('Count');
+        if($numberUser == 0)
+            return null;
+        $arrUser = array();
+        for($i = 0; $i < $numberUser; $i++ ){
+            array_push($arrUser, $response->get('Items')[$i]);
+        }
+        return $arrUser;
+    }
 }

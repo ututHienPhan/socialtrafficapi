@@ -32,6 +32,7 @@ class HouseRepository
         return $response->get('Item');
     }
 
+
     public function getAddressByCoordinate($latitude, $longitude) {
 
         $response = $this->dynamodb->scan([
@@ -43,8 +44,8 @@ class HouseRepository
 
             ],
             'ExpressionAttributeValues' => [
-                ':val1' => ['N' => $latitude],
-                ':val2' => ['N' => $longitude]
+                ':val1' => ['N' => (string)$latitude],
+                ':val2' => ['N' => (string)$longitude]
 
             ],
             'FilterExpression' => '#latitude = :val1 AND #longitude = :val2',

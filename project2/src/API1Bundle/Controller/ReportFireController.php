@@ -150,37 +150,44 @@ class ReportFireController extends Controller
         )
             return $registerResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->REPORT_FIRE_ERROR_REQUEST);
         $username = $tokenLogic->getUsername($token);
-         var_dump("123");die;
         if ($username === FALSE)
             return $registerResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->REPORT_FIRE_FAIL);
         else if ($username === NULL)
             return $registerResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->REPORT_FIRE_ERROR_NOT_FOUND);
-        else {
+        else { //tai khoan ton tai
             $reportfirelogic = new ReportFireLogic($this->get('aws.dynamodb'));
+            $houseLogic = new HouseLogic($this->get('aws.dynamodb'));
+             // xac nhan hoa hoan da duoc report chua
+            $resultComf = $reportfirelogic->getReportFireByCoordinate($status, $latitude, $longitude);
+            //arr username da dang ki nha gap hoa hoan
+            $arrUser = $houseLogic->getUsernames($licenseplate);
+            if($resultComf) { // hoa hoan da duoc report roi
+                $id_fire = $resultComf['id']['S'];
+                $latitude = $resultComf['latitude']["N"];
+                $longitude = $resultComf['longitude']["N"];
+                $address = $resultComf['address']['S'];
+                //xu ly vao phan xac nhan tai nan
+                $reponse =  $reportfirelogic->comfirmFire($username, $latitude, $longitude, '1', '0', $status, $time, $id_fire);
+                if($reponse === FALSE)
+                    return $registerResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->REPORT_FIRE_FAIL);
+                //push thong bao tai nan giao thong
+                $result = $reportfirelogic->pushNotify($address, $latitude, $longitude, $arrUser);
+                if($result)
+                    return $registerResponse->createResponseRegister($common->RESULT_CODE_SUCCESS, $common->REPORT_FIRE_SUCCESSFULLY );
+                return $registerResponse->createResponseRegister($common->RESULT_CODE_SUCCESS, $common->PUSH_NOTIFICATION_FAIL);
+            }
+            // hoa hoan chua duoc report
             $response = $reportfirelogic->insertReportFire($username, $latitude, $longitude, $timestart, $status,
                 $description, $image, $address, $level);
             if ($response === FALSE) {
                 return $registerResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->REPORT_FIRE_FAIL);
             } else {
-                //find address in database
-                $houselogic = new HouseLogic($this->get('aws.dynamodb'));
-                $firelogic = new FireLogic($this->get('aws.dynamodb'));
-                $house = $houselogic->getHouseInfo($latitude, $longitude);
-                $fire = $firelogic->getEvaluateAccurateFire($latitude, $longitude);
-                if($house && $house->get('Count') > 0 && $fire === 100)
-                {
-                    //notify if found address in database & evaluate = 100
-                    $numberReceiver = $house->get('Count');//so tai khoan dang ki dia chi nay
-                    //$receiverArray = array();//danh sach username da dang ki dia chi nay
-                    for($i = 0; $i < $numberReceiver; $i++)
-                    {
-                        $item = $house->get('Items')[$i]['username']['S'];
-                        //send notify to receiver
-                        $sendNotify = $reportfirelogic->sendNotificationGCM("Message", "d-tBRQgYL2M:APA91bGYLtYucBX70v4x6YqAYUU5BZpxmu8WnVnd6SV13WSBDOfM-dI7WEl1Lp4gEyzVNrNumYgRI3LajOLg67zbECjUtC-vgjzXo_QmGDupqer5AO8FGr928oJu5bXsjqF6f0zCHNvD");
-                        //array_push($receiverArray, $item);
-                    }
-                }
-                return $registerResponse->createResponseRegister($common->RESULT_CODE_SUCCESS, $common->REPORT_FIRE_SUCCESSFULLY);
+                //push thong bao hoa hoan
+                $result = $reportfirelogic->pushNotify($address, $latitude, $longitude, $arrUser);
+                if($result)
+                    return $registerResponse->createResponseRegister($common->RESULT_CODE_SUCCESS, $common->REPORT_FIRE_SUCCESSFULLY );
+
+                return $registerResponse->createResponseRegister($common->RESULT_CODE_SUCCESS, $common->PUSH_NOTIFICATION_FAIL);
             }
         }
     }

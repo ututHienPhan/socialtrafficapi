@@ -36,7 +36,7 @@ class ReportFireLogic
     public function getReportFireByCoordinate($status, $latitude, $longitude)
     {
         $reponse = $this->reportFireRepository->getReportFireByCoordinate($status, $latitude, $longitude);
-        return $reponse;//->get('Items');
+        return $reponse->get('Items')[0];
     }
 
     // them thong tin hoa hoan
@@ -107,4 +107,26 @@ class ReportFireLogic
         $response = $this->reportFireRepository->sendPushNotification($data, $id);
         return $response;
     }
+
+     //ham push thong bao hoa hoan
+    public function pushNotify($address, $latitude, $longitude, $arruser) {
+
+
+        $number = Count($arruser);
+        $push = new Push();
+        for($i = 0; $i < $number; $i++) {
+            $username = $arruser[$i]['username']['S'];
+            $result = $this->deviceTokenRepository->findByUsername($username);
+            if($result === FALSE)
+                return $result;
+            $numberdevice = Count($result);
+            for($j=0; $j<$numberdevice; $j++) {
+                $push->sendPushNotification($result[$j]['token']['S'], $latitude, $longitude,
+                                            $arruser[$i]['ownername']['S'], $licensplate, 'no handle');
+            }
+
+        }
+        return true;
+    }
+
 }

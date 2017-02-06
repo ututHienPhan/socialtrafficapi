@@ -64,14 +64,17 @@ class ReportAccidentController extends Controller {
             return $registerResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->REPORT_ACCIDENT_FAIL);
         else if($username === NULL)
             return $registerResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->REPORT_ACCIDENT_ERROR_NOT_FOUND);
-        else {
+        else { // tai khoan ton tai
             $reportaccidentlogic = new ReportAccidentLogic($this->get('aws.dynamodb'));
-            $resultComf = $reportaccidentlogic->comfirmAccidentByCoordinate($latitude, $longitude);
+            // xac nhan tai nan da duoc report chua
+            $resultComf = $reportaccidentlogic->comfirmAccidentByCoordinate($latitude, $longitude); 
+            //arr username da dang ki ban so xe gap tai nan
             $arrUser = $motoLogic->getUsernames($licenseplate);
             if($resultComf) { // tai nan da duoc report roi
                 $id_accident = $resultComf['id']['S'];
                 $latitude = $resultComf['latitude']["N"];
                 $longitude = $resultComf['longitude']["N"];
+                //xu ly vao phan xac nhan tai nan
                 $reponse =  $reportaccidentlogic->comfirmAccident($username, $latitude, $longitude, '1', '0', $status, $timestart, $id_accident);
                 if($reponse === FALSE)
                     return $registerResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->REPORT_ACCIDENT_FAIL);
@@ -81,10 +84,10 @@ class ReportAccidentController extends Controller {
                     return $registerResponse->createResponseRegister($common->RESULT_CODE_SUCCESS, $common->REPORT_ACCIDENT_SUCCESSFULLY );
                 return $registerResponse->createResponseRegister($common->RESULT_CODE_SUCCESS, $common->PUSH_NOTIFICATION_FAIL);
             }
+            //tai nan giao thong chua duoc report
             $reponse = $reportaccidentlogic->insertReportAccident($username, $latitude, $longitude, $timestart, $status,
                 $description, $image, $licenseplate, $level);
             if ($reponse === FALSE) {
-
                 return $registerResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->REPORT_ACCIDENT_FAIL);
             } else {
                 //push thong bao tai nan giao thong
@@ -169,13 +172,13 @@ class ReportAccidentController extends Controller {
             return $registerResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->REPORT_ACCIDENT_HANDLED_FAIL);
         else if ($username === NULL)
             return $registerResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->REPORT_ACCIDENT_HANDLED_ERROR_NOT_FOUND);
-        else {
+        else { // tai khoan ton tai
             $reportaccidentlogic = new ReportAccidentLogic($this->get('aws.dynamodb'));
             $accidentlogic = new AccidentLogic($this->get('aws.dynamodb'));
             $accident = $accidentlogic->getAccident($latitude, $longitude, "no handle");
-            if ($accident === FALSE)
+            if ($accident === FALSE) // error
                 return $registerResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->REPORT_ACCIDENT_HANDLED_FAIL);
-            if (!$accident->get("Items")) {
+            if (!$accident->get("Items")) {  
                 return $registerResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->REPORT_ACCIDENT_HANDLED);
             }
             $id_accident = $accident->get("Items")[0]["id"]["S"];

@@ -43,7 +43,7 @@ class ReportAccidentLogic {
     // get tai nan giao thong theo toa do va trang thai
     public function getReportAccidentByCoordinate( $status, $latitude, $longitude) {
         $reponse = $this->reportAccidentRepository->getReportAccidentByCoordinate($status, $latitude, $longitude);
-        return $reponse;//->get('Items');
+        return $reponse->get('Items')[0];
     }
 
     // them thong tin tai nan giao thong
