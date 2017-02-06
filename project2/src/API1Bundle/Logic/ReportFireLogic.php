@@ -75,13 +75,13 @@ class ReportFireLogic
 
         $resultFire = $this->fireRepository->getFireById($id_fire);
         return $resultFire;
-        $agree = $agree + $resultFire->get('Item')['agree']['N'];
+      /*  $agree = $agree + $resultFire->get('Item')['agree']['N'];
         $disagree = $disagree + $resultFire->get('Item')['disagree']['N'];
         var_dump($agree);
         var_dump($disagree);
         $reponse = $this->fireRepository->updateFireByComfirm($id_fire, $agree, $disagree);
         var_dump(123);die;
-        return $reponse;
+        return $reponse; */
     
     }
 
