@@ -25,10 +25,8 @@ class MotoRestController extends Controller {
         $registerResponse = new FormatResponse();
         $valid = new UserValidateHelper();
         $motoLogic = new MotoLogic($this->get('aws.dynamodb'));
-        var_dump("123");die;
         $tokenLogic = new TokenLogic($this->get('aws.dynamodb'));
         $datas = $this->get('request')->getContent();
-
         $array = json_decode($datas, true);
         $token = $array["token"];
         $licenseplate = $array["licenseplate"];
