@@ -141,7 +141,7 @@ class ReportFireController extends Controller
         $address = $array['address'];
         $level = $array['level'];
         $status = $array["status"];
-         var_dump("123");die;
+
         if (!$valid->validationIdToken($token) || !$valid->validationLatitude($latitude) ||
             !$valid->validationLongitude($longitude) || !$valid->validationDescription($description) ||
             !$valid->validationImage($image) || !$valid->validationStatus($status) ||
@@ -150,6 +150,7 @@ class ReportFireController extends Controller
         )
             return $registerResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->REPORT_FIRE_ERROR_REQUEST);
         $username = $tokenLogic->getUsername($token);
+         var_dump("123");die;
         if ($username === FALSE)
             return $registerResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->REPORT_FIRE_FAIL);
         else if ($username === NULL)
