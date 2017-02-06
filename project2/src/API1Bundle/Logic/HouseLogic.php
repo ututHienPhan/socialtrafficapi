@@ -34,7 +34,7 @@ class HouseLogic
 
     public function getHouseInfoByUsername($latitude, $longitude, $username)
     {
-        $house = $this->houseRepository->getAddressByCoordinate($latitude, $longitude, $username);
+        $house = $this->houseRepository->getAddressByCoordinateAndUser($latitude, $longitude, $username);
         return $house;
     }
 
