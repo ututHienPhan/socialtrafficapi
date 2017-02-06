@@ -164,7 +164,6 @@ class ReportFireController extends Controller
 
             //arr username da dang ki nha gap hoa hoan
             $arrUser = $houseLogic->getUsernames($latitude, $longitude);
-            var_dump('124');die;
             if($resultComf) { // hoa hoan da duoc report roi
                 $id_fire = $resultComf['id']['S'];
                 $latitude = $resultComf['latitude']["N"];
