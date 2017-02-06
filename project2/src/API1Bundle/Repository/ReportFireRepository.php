@@ -113,8 +113,8 @@ class ReportFireRepository
                 'username' => ['S' => $username],
                 'latitude' => ['N' => (string)$latitude],
                 'longitude' => ['N' => (string)$longitude],
-                'agree' => ['N' => (string)$agree],
-                'disagree' => ['N' => (string)$disagree],
+                'agree' => ['N' => $agree],
+                'disagree' => ['N' => $disagree],
                 'time' => ['S' => $time],
                 'statusA' => ['S' => $status],
                 'id_fire' => ['S' => $id_fire]
