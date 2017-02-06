@@ -66,6 +66,7 @@ class HouseRestController extends Controller
                 if($houseAddress === FALSE)
                     return $formatResponse->updateInfoResponse($common->RESULT_CODE_FAIL, $common->REGISTER_ADDRESS_FAIL, null);
                 return $formatResponse->updateInfoResponse($common->RESULT_CODE_SUCCESS, $common->REGISTER_ADDRESS_SUCCESSFULLY, $houseLogic->getHouseInfoById($id));
+            }
             
         }
     }
