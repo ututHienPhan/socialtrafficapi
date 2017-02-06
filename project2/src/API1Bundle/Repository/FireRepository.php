@@ -59,7 +59,7 @@ class FireRepository
     //get fire theo id
     public function getFireById($id)
     {
-
+        var_dump('123');
         $response = $this->dynamodb->getItem([
             'TableName' => $this->tableName,
             'Key' => [
