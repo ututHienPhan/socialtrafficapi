@@ -47,6 +47,7 @@ class HouseRepository
             'Select' => 'ALL_ATTRIBUTES'
         ]);
 
+        var_dump(123);
         return $response;
     }
 
