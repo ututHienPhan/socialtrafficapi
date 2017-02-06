@@ -84,7 +84,7 @@ class HouseRepository
                 'latitude' => ['N' => $latitude],
                 'longitude' => ['N' => $longitude],
                 'address' => ['S' => $address],
-                'ownername' => ['S'  => $ownername],
+                'ownername' => ['S'  => $ownername]
             ]
         ]);
         var_dump("123");die;
