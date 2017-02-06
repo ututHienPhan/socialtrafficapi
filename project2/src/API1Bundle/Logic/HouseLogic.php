@@ -8,7 +8,6 @@
 namespace API1Bundle\Logic;
 
 use API1Bundle\Repository\HouseRepository;
-use Symfony\Component\Validator\Constraints\True;
 
 class HouseLogic
 {
