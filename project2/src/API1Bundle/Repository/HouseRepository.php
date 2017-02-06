@@ -59,8 +59,8 @@ class HouseRepository
             'TableName' => $this->tableName,
             'ExpressionAttributeNames' => [
                 '#username' => 'username',
-                '#latitude' => 'latitude'
-                /*'#longitude' => 'longitude' */
+                '#latitude' => 'latitude',
+                '#longitude' => 'longitude'
             ],
             'ExpressionAttributeValues' =>  [
                 ':val1' => ['S' => $username],
