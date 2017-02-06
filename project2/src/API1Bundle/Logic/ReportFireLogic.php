@@ -69,7 +69,9 @@ class ReportFireLogic
     public function comfirmFire($username, $latitude, $longitude, $agree, $disagree, $status, $time, $id_fire)
     {
         $id = uniqid();
+        var_dump('134');
         $resultInsert = $this->reportFireRepository->comfirmFire($username, $latitude, $longitude, $agree, $disagree, $status, $time, $id_fire, $id);
+        var_dump('123');die;
         if ($resultInsert === FALSE)
             return FALSE;
 
@@ -79,6 +81,7 @@ class ReportFireLogic
             $agree = $agree + $resultAcc->get('Item')['agree']['N'];
             $disagree = $disagree + $resultAcc->get('Item')['disagree']['N'];
             $reponse = $this->fireRepository->updateFireByComfirm($id_fire, $agree, $disagree);
+
             return $reponse;
         } catch (Exception $e) {
             $this->reportFireRepository->delete($id);
