@@ -114,7 +114,6 @@ class ReportFireLogic
 
 
         $number = Count($arruser);
-        return $number;
         $push = new Push();
         for($i = 0; $i < $number; $i++) {
             $username = $arruser[$i]['username']['S'];

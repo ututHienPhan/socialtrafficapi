@@ -182,20 +182,21 @@ class ReportFireController extends Controller
                     return $registerResponse->createResponseRegister($common->RESULT_CODE_SUCCESS, $common->REPORT_FIRE_SUCCESSFULLY );
                 return $registerResponse->createResponseRegister($common->RESULT_CODE_SUCCESS, $common->PUSH_NOTIFICATION_FAIL);
             }
-            
-            // hoa hoan chua duoc report
-            $response = $reportfirelogic->insertReportFire($username, $latitude, $longitude, $timestart, $status,
-                $description, $image, $address, $level);
+            else {
+                // hoa hoan chua duoc report
+                $response = $reportfirelogic->insertReportFire($username, $latitude, $longitude, $timestart, $status,
+                    $description, $image, $address, $level);
 
-            if ($response === FALSE) {
-                return $registerResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->REPORT_FIRE_FAIL);
-            } else {
-                //push thong bao hoa hoan
-                $result = $reportfirelogic->pushNotify($address, $latitude, $longitude, $arrUser);
-                if($result)
-                    return $registerResponse->createResponseRegister($common->RESULT_CODE_SUCCESS, $common->REPORT_FIRE_SUCCESSFULLY );
+                if ($response === FALSE) {
+                    return $registerResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->REPORT_FIRE_FAIL);
+                } else {
+                    //push thong bao hoa hoan
+                    $result = $reportfirelogic->pushNotify($address, $latitude, $longitude, $arrUser);
+                    if($result)
+                        return $registerResponse->createResponseRegister($common->RESULT_CODE_SUCCESS, $common->REPORT_FIRE_SUCCESSFULLY );
 
-                return $registerResponse->createResponseRegister($common->RESULT_CODE_SUCCESS, $common->PUSH_NOTIFICATION_FAIL);
+                    return $registerResponse->createResponseRegister($common->RESULT_CODE_SUCCESS, $common->PUSH_NOTIFICATION_FAIL);
+                }
             }
         }
     }

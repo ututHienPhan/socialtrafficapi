@@ -107,8 +107,8 @@ class FireRepository
                 '#disagree' => 'disagree'
             ],
             'ExpressionAttributeValues' => [
-                ':val1' => ['N' => (string)$agree],
-                ':val2' => ['N' => (string)$disagree]
+                ':val1' => ['N' => $agree],
+                ':val2' => ['N' => $disagree]
             ],
             'UpdateExpression' => 'set #agree = :val1, #disagree = :val2',
             'ReturnValues' => 'ALL_NEW'
