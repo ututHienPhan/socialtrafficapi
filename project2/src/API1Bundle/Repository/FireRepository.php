@@ -46,8 +46,8 @@ class FireRepository
             ],
             'ExpressionAttributeValues' => [
                 ':val1' => ['S' => $status],
-                ':val2' => ['N' => $latitude],
-                ':val3' => ['N' => $longitude]
+                ':val2' => ['N' => (string)$latitude],
+                ':val3' => ['N' => (string)$longitude]
             ],
             'FilterExpression' => '#statusA = :val1 AND #latitude = :val2 AND #longitude = :val3',
             'Select' => 'ALL_ATTRIBUTES'
@@ -77,16 +77,16 @@ class FireRepository
             'TableName' => $this->tableName,
             'Item' => [
                 'id' => ['S' => $id],
-                'latitude' => ['N' => $latitude],
-                'longitude' => ['N' => $longitude],
+                'latitude' => ['N' => (string)$latitude],
+                'longitude' => ['N' => (string)$longitude],
                 'address' => ['S' => $address],
                 'timestart' => ['S' => $timestart],
                 'levelA' => ['S' => $level],
                 'desciption' => ['S' => $description],
                 'image' => ['S' => $image],
                 'statusA' => ['S' => $status],
-                'agree' => ['N' => 0],
-                'disagree' => ['N' => 0]
+                'agree' => ['N' => '0'],
+                'disagree' => ['N' => '0']
 
             ]
         ]);
@@ -107,8 +107,8 @@ class FireRepository
                 '#disagree' => 'disagree'
             ],
             'ExpressionAttributeValues' => [
-                ':val1' => ['N' => $agree],
-                ':val2' => ['N' => $disagree]
+                ':val1' => ['N' => (string)$agree],
+                ':val2' => ['N' => (string)$disagree]
             ],
             'UpdateExpression' => 'set #agree = :val1, #disagree = :val2',
             'ReturnValues' => 'ALL_NEW'
