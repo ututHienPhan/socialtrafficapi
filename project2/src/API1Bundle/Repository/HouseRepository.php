@@ -33,21 +33,24 @@ class HouseRepository
     }
 
     public function getAddressByCoordinate($latitude, $longitude) {
+
         $response = $this->dynamodb->scan([
             'TableName' => $this->tableName,
             'ExpressionAttributeNames' => [
                 '#latitude' => 'latitude',
                 '#longitude' => 'longitude'
+
+
             ],
             'ExpressionAttributeValues' =>  [
-                ':val2' => ['N' => $latitude],
-                ':val3' => ['N' => $longitude]
+                ':val1' => ['N' => $latitude],
+                ':val2' => ['N' => $longitude]
+
             ],
-            'FilterExpression' => '#latitude = :val2 AND #longitude = :val3',
+            'FilterExpression' => '#latitude = :val1 and #longitude = :val2',
             'Select' => 'ALL_ATTRIBUTES'
         ]);
 
-        var_dump(123);
         return $response;
     }
 
