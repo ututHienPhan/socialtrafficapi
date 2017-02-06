@@ -55,6 +55,9 @@ class HouseRepository
 
     public function getAddressByCoordinateAndUser($latitude, $longitude, $username) {
 
+        var_dump($latitude);
+        var_dump($longitude);
+        var_dump($username);
         var_dump("123");die;
         $response = $this->dynamodb->scan([
             'TableName' => $this->tableName,
