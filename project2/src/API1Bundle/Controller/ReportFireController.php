@@ -155,6 +155,7 @@ class ReportFireController extends Controller
         else if ($username === NULL)
             return $registerResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->REPORT_FIRE_ERROR_NOT_FOUND);
         else { //tai khoan ton tai
+            var_dump('123'); die;
             $reportfirelogic = new ReportFireLogic($this->get('aws.dynamodb'));
             $houseLogic = new HouseLogic($this->get('aws.dynamodb'));
              // xac nhan hoa hoan da duoc report chua
