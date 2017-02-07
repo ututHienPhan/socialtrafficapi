@@ -74,14 +74,14 @@ class Fire
     private $image;
 
     /**
-     * @var int
+     * @var string
      *
      * @Expose
      */
     private $agree;
 
     /**
-     * @var int
+     * @var string
      *
      * @Expose
      */
@@ -92,6 +92,19 @@ class Fire
      * @Expose
      */
     private $level;
+    /**
+     * @var string
+     *
+     * @Expose
+     */
+    private $address;
+    
+    /**
+     * @var string
+     *
+     * @Expose
+     */
+    private $timestart;
 
 
     function __construct($arrayData)
@@ -107,6 +120,8 @@ class Fire
         $this->disagree = $arrayData['disagree']['N'];
         $this->timestart = $arrayData['timestart']['S'];
         $this->username = $arrayData['username']['S'];
+        $this->address = $arrayData['address']['S'];
+
     }
 
     public function setId($id)
