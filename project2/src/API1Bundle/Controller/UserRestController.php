@@ -29,6 +29,7 @@ class UserRestController extends Controller
             //phan can chinh sua
             $username = $infoUser['username']['S'];
             $email = $infoUser['email']['S'];
+            $password = $password['password']['S'];
             $address = "";
             $fullname = "";
             $gender = "";
@@ -48,6 +49,7 @@ class UserRestController extends Controller
             }
             $user = [
                         'username' => $username,
+                        'password' => $password,
                         'email' => $email,
                         'address' => $address,
                         'gender' => $gender,
