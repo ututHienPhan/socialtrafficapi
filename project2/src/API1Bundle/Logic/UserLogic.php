@@ -39,7 +39,7 @@ class UserLogic
                 "email" => $result->get('Attributes')["email"]["S"],
                 "phone" => $result->get('Attributes')["phone"]["S"],
                 "address" => $result->get('Attributes')["address"]["S"],
-                "gender" => $result->get('Attributes')["gender"]["S"]);
+                "gender" => $result->get('Attributes')["gender"]["S"],
                 "avatar" => $result->get('Attributes')["avatar"]["S"]);
             return $response;
         }

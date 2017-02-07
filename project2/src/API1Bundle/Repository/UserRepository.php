@@ -66,7 +66,7 @@ class UserRepository
 
 	//update tai khoan
     //update tai khoan
-    public function updateUserInfo($fullname, $password, $email, $phone, $address, $gender, $username)
+    public function updateUserInfo($fullname, $password, $email, $phone, $address, $gender, $username, $avatar)
     {
         //$username = $decoded{"username"};
         if ($this->findByUsername($username) === FALSE)
@@ -97,7 +97,7 @@ class UserRepository
                     ':val7' => ['S' => $avatar]
                 ],
                 'UpdateExpression' => 'set #fullname = :val1, #password = :val2, #email = :val3,
-                                       #phone = :val4, #address = :val5, #gender = :val6, #avatar = :val7'
+                                       #phone = :val4, #address = :val5, #gender = :val6, #avatar = :val7',
                 'ReturnValues' => 'ALL_NEW'
             ]);
             return $response;
