@@ -158,21 +158,21 @@ class ReportFireController extends Controller
 
             $reportfirelogic = new ReportFireLogic($this->get('aws.dynamodb'));
             $houseLogic = new HouseLogic($this->get('aws.dynamodb'));
+            $fireLogic = new FireLogic($this->get('aws.dynamodb'));
 
              // xac nhan hoa hoan da duoc report chua
-            $resultComf = $reportfirelogic->getReportFireByCoordinate($status, $latitude, $longitude);
+            $resultComf = $fireLogic->getFireByCoordinate($status, $latitude, $longitude);
 
             //arr username da dang ki nha gap hoa hoan
             $arrUser = $houseLogic->getUsernames($latitude, $longitude);
             if($resultComf) { // hoa hoan da duoc report roi
-                $id_fire = $resultComf['id']['S'];
-                $latitude = $resultComf['latitude']['N'];
-                $longitude = $resultComf['longitude']['N'];
-                $address = $resultComf['address']['S'];
+                $id_fire = $resultComf[0]['id']['S'];
+                $latitude = $resultComf[0]['latitude']['N'];
+                $longitude = $resultComf[0]['longitude']['N'];
+                $address = $resultComf[0]['address']['S'];
                 //xu ly vao phan xac nhan tai nan
 
                 $reponse =  $reportfirelogic->comfirmFire($username, $latitude, $longitude, '1', '0', $status, $timestart, $id_fire);
-                return $response; //them
                 if($reponse === FALSE)
                     return $registerResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->REPORT_FIRE_FAIL);
                 //push thong bao tai nan giao thong

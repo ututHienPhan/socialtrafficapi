@@ -11,6 +11,7 @@ use API1Bundle\Repository\FireRepository;
 use API1Bundle\Repository\ReportFireRepository;
 use API1Bundle\Reference\Reference;
 use Symfony\Component\Config\Definition\Exception\Exception;
+use API1Bundle\FirebaseCloudMessage\Push;
 
 
 class ReportFireLogic
@@ -36,7 +37,7 @@ class ReportFireLogic
     public function getReportFireByCoordinate($status, $latitude, $longitude)
     {
         $reponse = $this->reportFireRepository->getReportFireByCoordinate($status, $latitude, $longitude);
-        return $reponse->get('Items')[0];
+        return $reponse->get('Items');
     }
 
     // them thong tin hoa hoan
@@ -72,16 +73,11 @@ class ReportFireLogic
         $resultInsert = $this->reportFireRepository->comfirmFire($username, $latitude, $longitude, $agree, $disagree, $status, $time, $id_fire, $id);
         if ($resultInsert === FALSE)
             return FALSE;
-
         $resultFire = $this->fireRepository->getFireById($id_fire);
-        return $resultFire;
-      /*  $agree = $agree + $resultFire->get('Item')['agree']['N'];
+        $agree = $agree + $resultFire->get('Item')['agree']['N'];
         $disagree = $disagree + $resultFire->get('Item')['disagree']['N'];
-        var_dump($agree);
-        var_dump($disagree);
         $reponse = $this->fireRepository->updateFireByComfirm($id_fire, $agree, $disagree);
-        var_dump(123);die;
-        return $reponse; */
+        return $reponse;
     
     }
 

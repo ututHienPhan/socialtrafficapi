@@ -92,5 +92,11 @@ class FireLogic
         return $kilometers;
     }
 
+        // get hoa hoan theo toa do va trang thai
+    public function getFireByCoordinate($status, $latitude, $longitude)
+    {
+        $reponse = $this->fireRepository->getFire($latitude, $longitude, $status);
+        return $reponse->get('Items');
+    }
 
 }
