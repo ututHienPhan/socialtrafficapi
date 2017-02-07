@@ -24,7 +24,14 @@ class UserValidateHelper
     		return false;
     	return true;
     }
+     //test avatar
+    public function validationAvatar($avatar) {
 
+        if(($avatar === NULL) || (!is_string($avatar))) {
+            return false;
+        }
+        return true;
+    }
     //test latitude
     public function validationLatitude($latitude) {
 

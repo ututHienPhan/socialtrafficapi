@@ -27,9 +27,9 @@ class UserLogic
         return $response;
     }
 
-    public function updateUserInfo($fullname, $password, $email, $phone, $address, $gender, $username)
+    public function updateUserInfo($fullname, $password, $email, $phone, $address, $gender, $username, $avatar)
     {
-        $result = $this->userRepository->updateUserInfo($fullname, $password, $email, $phone, $address, $gender, $username);
+        $result = $this->userRepository->updateUserInfo($fullname, $password, $email, $phone, $address, $gender, $username, $avatar);
         if($result===FALSE){
             return NULL;
         }
@@ -40,6 +40,7 @@ class UserLogic
                 "phone" => $result->get('Attributes')["phone"]["S"],
                 "address" => $result->get('Attributes')["address"]["S"],
                 "gender" => $result->get('Attributes')["gender"]["S"]);
+                "avatar" => $result->get('Attributes')["avatar"]["S"]);
             return $response;
         }
     }

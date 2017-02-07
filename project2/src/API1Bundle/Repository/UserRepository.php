@@ -84,7 +84,8 @@ class UserRepository
                     '#email' => 'email',
                     '#phone' => 'phone',
                     '#address' => 'address',
-                    '#gender' => 'gender'
+                    '#gender' => 'gender',
+                    '#avatar' => 'avatar'
                 ],
                 'ExpressionAttributeValues' => [
                     ':val1' => ['S' => $fullname],
@@ -93,9 +94,10 @@ class UserRepository
                     ':val4' => ['S' => $phone],
                     ':val5' => ['S' => $address],
                     ':val6' => ['S' => $gender],
+                    ':val7' => ['S' => $avatar]
                 ],
                 'UpdateExpression' => 'set #fullname = :val1, #password = :val2, #email = :val3,
-                                       #phone = :val4, #address = :val5, #gender = :val6',
+                                       #phone = :val4, #address = :val5, #gender = :val6, #avatar = :val7'
                 'ReturnValues' => 'ALL_NEW'
             ]);
             return $response;

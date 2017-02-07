@@ -114,6 +114,7 @@ class UserRestController extends Controller
         $phone = $array["phone"];
         $address = $array["address"];
         $gender = $array["gender"];
+        $avatar = $array["avatar"];
         if(!$valid->validationIdToken($token))
             return $formatResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->UPDATE_INFO_TOKEN_ERROR_REQUEST);
         $username = $tokenLogic->getUsername($token);
@@ -124,10 +125,10 @@ class UserRestController extends Controller
         else {
             if (!$valid->validationEmail($email) || !$valid->validationAddress($address) || !$valid->validationPassword($password) ||
                 !$valid->validationFullname($fullname) || !$valid->validationGender($gender) || !$valid->validationPhone($phone)
-            ) {
+                || !$valid->validationAvatar($avatar)) {
                 return $formatResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->UPDATE_INFO_ERROR_INPUT);
             }
-            $user = $userLogic->updateUserInfo($fullname, $password, $email, $phone, $address, $gender, $username);
+            $user = $userLogic->updateUserInfo($fullname, $password, $email, $phone, $address, $gender, $username, $avatar);
             if($user === NULL)
                 return $formatResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->UPDATE_INFO_FAIL);
         }
