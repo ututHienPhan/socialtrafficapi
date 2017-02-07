@@ -55,6 +55,7 @@ class UserRestController extends Controller
                         'username' => $username,
                         'password' => $password,
                         'email' => $email,
+                        'fullname' => $fullname,
                         'address' => $address,
                         'gender' => $gender,
                         'phone' => $phone,
