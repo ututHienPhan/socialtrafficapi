@@ -34,6 +34,7 @@ class UserRestController extends Controller
             $fullname = "";
             $gender = "";
             $phone = "";
+            $avatar = "";
             if(isset($infoUser['address'])){
                 $address = $infoUser['address']['S'];
             }
@@ -47,13 +48,17 @@ class UserRestController extends Controller
             if(isset($infoUser['phone'])) {
                 $phone = $infoUser['phone']['S'];
             }
+            if(isset($infoUser['avatar'])) {
+                $avatar = $infoUser['avatar']['S'];
+            }
             $user = [
                         'username' => $username,
                         'password' => $password,
                         'email' => $email,
                         'address' => $address,
                         'gender' => $gender,
-                        'phone' => $phone
+                        'phone' => $phone,
+                        'avatar' => $avatar
                      ];
             // phan can chinh sua
             return $formatResponse->updateInfoResponse($common->RESULT_CODE_SUCCESS, $common->GET_INFO_USER_SUCCESSULLY, $user);
