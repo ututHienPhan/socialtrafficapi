@@ -74,14 +74,14 @@ class Fire
     private $image;
 
     /**
-     * @var string
+     * @var int
      *
      * @Expose
      */
     private $agree;
 
     /**
-     * @var string
+     * @var int
      *
      * @Expose
      */
@@ -98,7 +98,7 @@ class Fire
      * @Expose
      */
     private $address;
-    
+
     /**
      * @var string
      *
