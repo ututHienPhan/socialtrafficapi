@@ -29,7 +29,7 @@ class UserRestController extends Controller
             //phan can chinh sua
             $username = $infoUser['username']['S'];
             $email = $infoUser['email']['S'];
-            $password = $password['password']['S'];
+            $password = $infoUser['password']['S'];
             $address = "";
             $fullname = "";
             $gender = "";
