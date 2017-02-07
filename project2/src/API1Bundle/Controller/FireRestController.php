@@ -9,6 +9,7 @@ namespace API1Bundle\Controller;
 
 use API1Bundle\Common\Common;
 use API1Bundle\Logic\FireLogic;
+use API1Bundle\Entity\Fire;
 use FOS\RestBundle\View\View;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use API1Bundle\FormatResponse\FormatResponse;
@@ -16,7 +17,7 @@ use API1Bundle\Utils\UserValidateHelper;
 
 class FireRestController extends Controller
 {
-    //Gui thong tin hoa hoan
+    //Lay thong tin cua hoa hoan
     public function postFireAction()
     {
         $fireLogic = new FireLogic($this->get('aws.dynamodb'));
@@ -35,8 +36,9 @@ class FireRestController extends Controller
             return $formatResponse->reportFireResponse($common->RESULT_CODE_FAIL, $common->GET_FIRE_FAIL, null);
         }
         if ($response->get('Items')) {
-
-            return $formatResponse->reportFireResponse($common->RESULT_CODE_SUCCESS, $common->GET_FIRE_SUCCESSULLY, null);
+            $arr = $response->get('Items')[0];
+            $fire = new Fire($arr);
+            return $formatResponse->reportFireResponse($common->RESULT_CODE_SUCCESS, $common->GET_FIRE_SUCCESSULLY, $fire);
         }
         return $formatResponse->reportFireResponse($common->RESULT_CODE_FAIL, $common->GET_FIRE_ERROR_NOT_FOUND, null);
     }
