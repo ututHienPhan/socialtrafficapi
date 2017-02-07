@@ -26,8 +26,35 @@ class UserRestController extends Controller
         }
         if ($response->get('Item')) {
             $infoUser = $response->get('Item');
-
-            return $formatResponse->updateInfoResponse($common->RESULT_CODE_SUCCESS, $common->GET_INFO_USER_SUCCESSULLY, $user->get('Item'));
+            //phan can chinh sua
+            $username = $infoUser['username']['S'];
+            $email = $infoUser['email']['S'];
+            $address = "";
+            $fullname = "";
+            $gender = "";
+            $phone = "";
+            if(isset($infoUser['address'])){
+                $address = $infoUser['address']['S'];
+            }
+            if(isset($infoUser['fullname'])){
+                $fullname = $infoUser['fullname']['S'];
+            }
+            
+            if(isset($infoUser['gender'])) {
+                $gender = $infoUser['gender']['S'];
+            }
+            if(isset($infoUser['phone'])) {
+                $phone = $infoUser['phone']['S'];
+            }
+            $user = [
+                        'username' => $username,
+                        'email' => $email,
+                        'address' => $address,
+                        'gender' => $gender,
+                        'phone' => $phone
+                     ];
+            // phan can chinh sua
+            return $formatResponse->updateInfoResponse($common->RESULT_CODE_SUCCESS, $common->GET_INFO_USER_SUCCESSULLY, $user);
 
         }
         return $formatResponse->updateInfoResponse($common->RESULT_CODE_FAIL, $common->GET_INFO_USER_ERROR_NOT_FOUND, null);
@@ -85,7 +112,6 @@ class UserRestController extends Controller
         $phone = $array["phone"];
         $address = $array["address"];
         $gender = $array["gender"];
-        var_dump($gender); die;
         if(!$valid->validationIdToken($token))
             return $formatResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->UPDATE_INFO_TOKEN_ERROR_REQUEST);
         $username = $tokenLogic->getUsername($token);
