@@ -56,7 +56,7 @@ class ReportFireLogic
         } else {  // thưc hien them thong tin vao table fire
             $id_fire = uniqid();
             $reponse = $this->fireRepository->insertFire($id_fire, $latitude, $longitude, $timestart, $status,
-                $description, $image, $address, $level);
+                $description, $image, $address, $level, $username);
             if ($reponse === FALSE) {
                 return $reponse;
             } else { // update them thuoc tinh id_fire cho bang report_fire

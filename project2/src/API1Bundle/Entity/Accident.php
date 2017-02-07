@@ -106,6 +106,7 @@
          $this->disagree = $arrayData['disagree']['N'];
          $this->level = $arrayData['levelA']['S'];
          $this->timestart = $arrayData['timestart']['S'];
+         $this->username = $arrayData['username']['S'];
 
      }
 

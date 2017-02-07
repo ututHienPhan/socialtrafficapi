@@ -63,7 +63,7 @@ class ReportAccidentLogic {
         else {  // thưc hien them thong tin vao table accident
             $id_accident = uniqid();
             $reponse = $this->accidentRepository->insertAccident($id_accident, $latitude, $longitude, $timestart, $status,
-                $description, $image, $licenseplate, $level);
+                $description, $image, $licenseplate, $level, $username);
             if($reponse === FALSE) {
                 return $reponse;
             }

@@ -14,16 +14,19 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 
 class UserRestController extends Controller
 {
+    // lay thong tin cua nguoi dung
     public function getUserAction($username){
         $userLogic = new UserLogic($this->get('aws.dynamodb'));
 		$formatResponse = new FormatResponse();
         $common = new Common();
-        $user = $userLogic->getUserInfo($username);
+        $response = $userLogic->getUserInfo($username);
 
-        if($user === FAlSE) {
+        if($response === FAlSE) {
             return $formatResponse->updateInfoResponse($common->RESULT_CODE_FAIL, $common->GET_INFO_USER_FAIL, null);
         }
-        if ($user->get('Item')) {
+        if ($response->get('Item')) {
+            $infoUser = $response->get('Item');
+
             return $formatResponse->updateInfoResponse($common->RESULT_CODE_SUCCESS, $common->GET_INFO_USER_SUCCESSULLY, $user->get('Item'));
 
         }
@@ -73,15 +76,16 @@ class UserRestController extends Controller
         $valid = new UserValidateHelper();
         $tokenLogic = new TokenLogic($this->get('aws.dynamodb'));
         $userLogic = new UserLogic($this->get('aws.dynamodb'));
-        $content = trim(file_get_contents("php://input"));
-        $decoded = json_decode($content, true);
-        $token = $decoded["token"];
-        $password = $decoded["password"];
-        $fullname = $decoded["fullname"];
-        $email = $decoded["email"];
-        $phone = $decoded["phone"];
-        $address = $decoded["address"];
-        $gender = $decoded["gender"];
+        $datas = $this->get('request')->getContent();
+        $array = json_decode($datas, true);
+        $token = $array["token"];
+        $password = $array["password"];
+        $fullname = $array["fullname"];
+        $email = $array["email"];
+        $phone = $array["phone"];
+        $address = $array["address"];
+        $gender = $array["gender"];
+        var_dump($gender); die;
         if(!$valid->validationIdToken($token))
             return $formatResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->UPDATE_INFO_TOKEN_ERROR_REQUEST);
         $username = $tokenLogic->getUsername($token);

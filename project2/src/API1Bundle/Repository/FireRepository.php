@@ -71,7 +71,7 @@ class FireRepository
 
     //insert new fire
     public function insertFire($id, $latitude, $longitude, $timestart, $status,
-                                   $description, $image, $address, $level)
+                                   $description, $image, $address, $level, $username)
     {
         $response = $this->dynamodb->putItem([
             'TableName' => $this->tableName,
@@ -86,7 +86,8 @@ class FireRepository
                 'image' => ['S' => $image],
                 'statusA' => ['S' => $status],
                 'agree' => ['N' => '0'],
-                'disagree' => ['N' => '0']
+                'disagree' => ['N' => '0'],
+                'username' => ['S' => $username]
 
             ]
         ]);

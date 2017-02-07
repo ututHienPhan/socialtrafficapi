@@ -69,7 +69,7 @@ class AccidentRepository
 
     //insert new accident
     public function insertAccident($id, $latitude, $longitude, $timestart, $status,
-                                         $description, $image, $licenseplate, $level){
+                                         $description, $image, $licenseplate, $level, $username){
 
         $response = $this->dynamodb->putItem([
             'TableName' => $this->tableName,
@@ -84,7 +84,8 @@ class AccidentRepository
                 'image' => ['S' => $image],
                 'statusA' => ['S'  => $status],
                 'agree' => ['N' => '0'],
-                'disagree' => ['N' => '0']
+                'disagree' => ['N' => '0'],
+                'username' => ['S' => $username]
 
             ]
         ]);

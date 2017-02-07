@@ -106,6 +106,7 @@ class Fire
         $this->agree = $arrayData['agree']['N'];
         $this->disagree = $arrayData['disagree']['N'];
         $this->timestart = $arrayData['timestart']['S'];
+        $this->username = $arrayData['username']['S'];
     }
 
     public function setId($id)

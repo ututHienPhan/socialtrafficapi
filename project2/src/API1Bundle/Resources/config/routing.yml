@@ -5,7 +5,7 @@ api_user:
     resource:     "API1Bundle:UserRest"
 
 api_update:
-    path : /edit
+    path : /users/edit
     defaults:  { _controller: API1Bundle:UserRest:update }
     methods: [PUT]
 
@@ -117,4 +117,4 @@ api_user_logout:
 api_test:
     path: /test
     defaults: { _controller: API1Bundle:ReportAccident:test}
-    methods: [POST]
+    methods: [GET]
