@@ -12,6 +12,7 @@ use API1Bundle\Repository\ReportFireRepository;
 use API1Bundle\Reference\Reference;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use API1Bundle\FirebaseCloudMessage\Push;
+use API1Bundle\Repository\DeviceTokenRepository;
 
 
 class ReportFireLogic
@@ -24,6 +25,7 @@ class ReportFireLogic
     {
         $this->reportFireRepository = new ReportFireRepository($dynamodb);
         $this->fireRepository = new FireRepository($dynamodb);
+        $this->deviceTokenRepository = new DeviceTokenRepository($dynamodb);
     }
 
     //get hoa hoan theo id
@@ -105,7 +107,7 @@ class ReportFireLogic
     }
 
      //ham push thong bao hoa hoan
-    public function pushNotify($address, $latitude, $longitude, $arruser) {
+    public function pushNotify($address, $arruser) {
 
 
         $number = Count($arruser);
@@ -115,11 +117,12 @@ class ReportFireLogic
             $result = $this->deviceTokenRepository->findByUsername($username);
             if($result === FALSE)
                 return $result;
-            $numberdevice = Count($result);
-            for($j=0; $j<$numberdevice; $j++) {
-                $push->sendPushNotification($result[$j]['token']['S'], $latitude, $longitude,
-                                            $arruser[$i]['ownername']['S'], $licensplate, 'no handle');
-            }
+            $numberdevice = $result->get('Count');
+            for($j=0; $j<$numberdevice; $j++)
+             { 
+                 $push->sendPushNotificationFire($result->get('Items')[$j]['token']['S'],
+                                            $arruser[$i]['ownername']['S'], $address);
+           }
 
         }
         return true;

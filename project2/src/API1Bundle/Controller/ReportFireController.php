@@ -177,7 +177,7 @@ class ReportFireController extends Controller
                     return $registerResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->REPORT_FIRE_FAIL);
                 //push thong bao tai nan giao thong
 
-                $result = $reportfirelogic->pushNotify($address, $latitude, $longitude, $arrUser);
+                $result = $reportfirelogic->pushNotify($address, $arrUser);
                 if($result)
                     return $registerResponse->createResponseRegister($common->RESULT_CODE_SUCCESS, $common->REPORT_FIRE_SUCCESSFULLY );
                 return $registerResponse->createResponseRegister($common->RESULT_CODE_SUCCESS, $common->PUSH_NOTIFICATION_FAIL);
@@ -191,7 +191,7 @@ class ReportFireController extends Controller
                     return $registerResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->REPORT_FIRE_FAIL);
                 } else {
                     //push thong bao hoa hoan
-                    $result = $reportfirelogic->pushNotify($address, $latitude, $longitude, $arrUser);
+                    $result = $reportfirelogic->pushNotify($address, $arrUser);
                     if($result)
                         return $registerResponse->createResponseRegister($common->RESULT_CODE_SUCCESS, $common->REPORT_FIRE_SUCCESSFULLY );
 

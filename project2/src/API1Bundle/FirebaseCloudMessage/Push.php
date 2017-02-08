@@ -14,28 +14,34 @@ use sngrl\PhpFirebaseCloudMessaging\Notification;
 
 class Push {
 
-    public function sendPushNotification($tokendevice, $latitude, $longitude, $ownername, $licenseplate, $status)
+    public function sendPushNotificationAccident($tokendevice, $ownername, $licenseplate)
     {
         $server_key = 'AIzaSyAbajvFIv0xO-TrqU3IETalKoOGScZ7vaM';
         $client = new Client();
         $client->setApiKey($server_key);
         $client->injectGuzzleHttpClient(new \GuzzleHttp\Client());
-
         $message = new Message();
         $message->setPriority('high');
         $message->addRecipient(new Device($tokendevice));
-        $message->setNotification(new Notification('Notify accident', 'Infomation accident'))
-            ->setData(
-                ['latitude' => $latitude],
-                ['longitude' => $longitude],
-                ['ownername' => $ownername],
-                ['licenseplate' => $licenseplate],
-                ['status' => $status]);
+        $message->setNotification(new Notification('Notify accident', 'Thông tin xe tai nạn: (Chủ xe: '.$ownername.', Bản số xe: '.$licenseplate));
 
         $response = $client->send($message);
-        var_dump($response->getStatusCode());
-        var_dump($response->getBody()->getContents());
-        return "";
+        return $response;
+    }
+
+     public function sendPushNotificationFire($tokendevice, $ownername, $address)
+    {
+        $server_key = 'AIzaSyAbajvFIv0xO-TrqU3IETalKoOGScZ7vaM';
+        $client = new Client();
+        $client->setApiKey($server_key);
+        $client->injectGuzzleHttpClient(new \GuzzleHttp\Client());
+        $message = new Message();
+        $message->setPriority('high');
+        $message->addRecipient(new Device($tokendevice));
+        $message->setNotification(new Notification('Notify fire', 'Thông tin hỏa hoạn: (Chủ nhà: '.$ownername.', Địa chỉ: '.$address));
+
+        $response = $client->send($message);
+        return $response;
     }
 
 }

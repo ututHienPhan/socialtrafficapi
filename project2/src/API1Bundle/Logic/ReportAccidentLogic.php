@@ -141,7 +141,7 @@ class ReportAccidentLogic {
     }
 
     //ham push thong bao tai nan giao thong
-    public function pushNotify($licensplate, $latitude, $longitude, $arruser) {
+    public function pushNotify($licensplate, $arruser) {
 
 
         $number = Count($arruser);
@@ -151,15 +151,15 @@ class ReportAccidentLogic {
             $result = $this->deviceTokenRepository->findByUsername($username);
             if($result === FALSE)
                 return $result;
-            $numberdevice = Count($result);
-            for($j=0; $j<$numberdevice; $j++) {
-                $push->sendPushNotification($result[$j]['token']['S'], $latitude, $longitude,
-                                            $arruser[$i]['ownername']['S'], $licensplate, 'no handle');
-            }
+            $numberdevice = $result->get('Count');
+            for($j=0; $j<$numberdevice; $j++)
+             { 
+                 $push->sendPushNotificationAccident($result->get('Items')[$j]['token']['S'],
+                                            $arruser[$i]['ownername']['S'], $licensplate);
+           }
 
         }
         return true;
-    }
-
+}
 
 }

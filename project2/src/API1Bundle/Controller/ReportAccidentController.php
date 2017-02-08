@@ -79,7 +79,7 @@ class ReportAccidentController extends Controller {
                 if($reponse === FALSE)
                     return $registerResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->REPORT_ACCIDENT_FAIL);
                 //push thong bao tai nan giao thong
-                $result = $reportaccidentlogic->pushNotify($licenseplate, $latitude, $longitude, $arrUser);
+                $result = $reportaccidentlogic->pushNotify($licenseplate, $arrUser);
                 if($result)
                     return $registerResponse->createResponseRegister($common->RESULT_CODE_SUCCESS, $common->REPORT_ACCIDENT_SUCCESSFULLY );
                 return $registerResponse->createResponseRegister($common->RESULT_CODE_SUCCESS, $common->PUSH_NOTIFICATION_FAIL);
@@ -91,7 +91,7 @@ class ReportAccidentController extends Controller {
                 return $registerResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->REPORT_ACCIDENT_FAIL);
             } else {
                 //push thong bao tai nan giao thong
-                $result = $reportaccidentlogic->pushNotify($licenseplate, $latitude, $longitude, $arrUser);
+                $result = $reportaccidentlogic->pushNotify($licenseplate, $arrUser);
                 if($result)
                     return $registerResponse->createResponseRegister($common->RESULT_CODE_SUCCESS, $common->REPORT_ACCIDENT_SUCCESSFULLY );
 
@@ -195,7 +195,7 @@ class ReportAccidentController extends Controller {
     public function testAction()
     {
         // get the mailer first (mandatory to initialize Swift Mailer)
-        $mailer = $this->get('mailer');
+       /* $mailer = $this->get('mailer');
 
         $message = \Swift_Message::newInstance()
             ->setSubject('Hello Email')
@@ -204,7 +204,16 @@ class ReportAccidentController extends Controller {
             ->setBody('hello', array('name' => 'hien de thuong'))
         ;
         $mailer->send($message);
-        return "yes";
+        return "yes"; */
+
+        $motoLogic = new MotoLogic($this->get('aws.dynamodb'));
+        $reportaccidentlogic = new ReportAccidentLogic($this->get('aws.dynamodb'));
+        $licenseplate = '77D1 188.34';
+        $arrUser = $motoLogic->getUsernames($licenseplate);
+        $result = $reportaccidentlogic->pushNotify($licenseplate, $arrUser);
+        return $result;
+
     }
 
 }
+
