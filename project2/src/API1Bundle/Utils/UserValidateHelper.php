@@ -17,6 +17,13 @@ class UserValidateHelper
             return $common->UPDATE_INFO_USER_NULL;
         return $common->UPDATE_VALIDATE_TRUE;
     }*/
+    //test id token
+    public function validationDistance($distance) {
+       if(($distance === NULL) || (!is_int($distance))) {
+            return false;
+        }
+        return true;
+    }
 
     //test id token
     public function validationIdToken($id) {

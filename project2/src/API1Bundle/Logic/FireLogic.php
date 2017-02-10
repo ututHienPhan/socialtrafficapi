@@ -11,7 +11,7 @@ use API1Bundle\Common\Common;
 use API1Bundle\Entity\Fire;
 use API1Bundle\Repository\FireRepository;
 use Symfony\Component\Validator\Constraints\Count;
-
+use API1Bundle\Reference\Reference;
 
 class FireLogic
 {
@@ -31,7 +31,7 @@ class FireLogic
     }
 
     //get cac dia diem xay ra hoa hoan
-    public function getFireLocal($latitude, $longitude)
+    public function getFireLocal($latitude, $longitude, $distance)
     {
         $status = 'no handle';
         $fire = $this->fireRepository->getFireByStatus($status);
@@ -45,10 +45,13 @@ class FireLogic
         for ($i = 0; $i < $numberAcc; $i++) {
             $latitudeA = $fire->get('Items')[$i]['latitude']['N'];
             $longitudeA = $fire->get('Items')[$i]['longitude']['N'];
-            $distance = $this->getDistanceBetweenPointsNew($latitude, $longitude, $latitudeA, $longitudeA);
-            if ($distance <= 100)
+            $ref = new Reference();
+            $distanceReal = $ref->getDistanceBetweenPointsNew($latitude, $longitude, $latitudeA, $longitudeA);
+            if ($distanceReal <= $distance)
+            {
                 $arr = new Fire($fire->get('Items')[$i]);
                 array_push($result, $arr);
+            }
         }
         if (count($result) == 0)
             return null;
@@ -79,18 +82,6 @@ class FireLogic
         return $evaluate;
     }
 
-    //ham tinh khoang cach 2 toa do
-    private function getDistanceBetweenPointsNew($latitude1, $longitude1, $latitude2, $longitude2)
-    {
-        $theta = $longitude1 - $longitude2;
-        $miles = (sin(deg2rad($latitude1)) * sin(deg2rad($latitude2))) + (cos(deg2rad($latitude1))
-                * cos(deg2rad($latitude2)) * cos(deg2rad($theta)));
-        $miles = acos($miles);
-        $miles = rad2deg($miles);
-        $miles = $miles * 60 * 1.1515;
-        $kilometers = $miles * 1.609344;
-        return $kilometers;
-    }
 
         // get hoa hoan theo toa do va trang thai
     public function getFireByCoordinate($status, $latitude, $longitude)

@@ -58,10 +58,11 @@ class AccidentRestController extends Controller {
         $array = json_decode($datas, true);
         $latitude = $array["latitude"];
         $longitude = $array["longitude"];
-        if(!$valid->validationLatitude($latitude) || !$valid->validationLongitude($longitude)) {
+        $distance = $array["distance"];
+        if(!$valid->validationLatitude($latitude) || !$valid->validationLongitude($longitude) || !$valid->validationDistance($distance)) {
             return $formatResponse->updateInfoResponse($common->RESULT_CODE_FAIL, $common->GET_ACCIDENTS_LOCAL_ERROR_REQUEST, null);
         }
-        $respone = $accidentLogic->getAccidentsLocal($latitude, $longitude);
+        $respone = $accidentLogic->getAccidentsLocal($latitude, $longitude, $distance);
         if($respone === FALSE)
             return $formatResponse->updateInfoResponse($common->RESULT_CODE_FAIL, $common->GET_ACCIDENTS_LOCAL_FAIL, null);
         if($respone === null)

@@ -32,7 +32,7 @@ class AccidentLogic
     }
 
     //get cac dia diem xay ra tai nan giao thong
-    public function getAccidentsLocal($latitude, $longitude) {
+    public function getAccidentsLocal($latitude, $longitude, $distance) {
 
         $status = 'no handle';
         $accidents = $this->accidentRepository->getAccidentByStatus($status);
@@ -48,10 +48,12 @@ class AccidentLogic
             $latitudeA = $accidents->get('Items')[$i]['latitude']['N'];
             $longitudeA = $accidents->get('Items')[$i]['longitude']['N'];
             $ref = new Reference();
-            $distance =  $ref->getDistanceBetweenPointsNew($latitude, $longitude, $latitudeA, $longitudeA);
-            if($distance <= 100)
+            $distanceReal =  $ref->getDistanceBetweenPointsNew($latitude, $longitude, $latitudeA, $longitudeA);
+            if($distanceReal <= $distance)
+            {
                 $acci = new Accident($accidents->get('Items')[$i]);
                 array_push($result,$acci); //moi them
+            }
         }
         if(count($result) == 0)
             return null;
@@ -77,8 +79,8 @@ class AccidentLogic
         }
         $evaluate = ($agree+1)/($common->NUMBER+$disagree)*100;
         $evaluate = (int)$evaluate;
-        if($evaluate > 100)
-            return 100;
+        if($evaluate >= 100)
+            return 99;
         return $evaluate;
     }
 

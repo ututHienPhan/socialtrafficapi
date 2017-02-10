@@ -54,10 +54,11 @@ class FireRestController extends Controller
         $array = json_decode($data, true);
         $latitude = $array["latitude"];
         $longitude = $array["longitude"];
-        if (!$valid->validationLatitude($latitude) || !$valid->validationLongitude($longitude)) {
+        $distance = $array["distance"];
+        if (!$valid->validationLatitude($latitude) || !$valid->validationLongitude($longitude) || !$valid->validationDistance($distance)) {
             return $formatResponse->reportFireResponse($common->RESULT_CODE_FAIL, $common->GET_FIRE_LOCAL_ERROR_REQUEST, null);
         }
-        $respone = $fireLogic->getFireLocal($latitude, $longitude);
+        $respone = $fireLogic->getFireLocal($latitude, $longitude, $distance);
         if ($respone === FALSE)
             return $formatResponse->reportFireResponse($common->RESULT_CODE_FAIL, $common->GET_FIRE_LOCAL_FAIL, null);
         if ($respone === null)

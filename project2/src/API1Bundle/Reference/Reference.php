@@ -27,6 +27,6 @@ class Reference {
 
         $kilometers = $miles * 1.609344;
 
-        return $kilometers;
+        return $kilometers*1000;
     }
 }
