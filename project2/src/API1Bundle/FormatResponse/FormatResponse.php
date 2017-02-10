@@ -55,6 +55,16 @@ class FormatResponse {
         return $respone;
     }
 
+        public function loginFacebookResponse($resultCode, $resultMessage, $username, $token){
+        $respone = array(
+            'resultCode' => $resultCode,
+            'resultMessage' => $resultMessage,
+            'username'=> $username,
+            'token' => $token
+        );
+        return $respone;
+    }
+
     public function getResultEvaluateAccurateAccident($resultCode, $resultMessage, $data) {
 
         $respone = array(

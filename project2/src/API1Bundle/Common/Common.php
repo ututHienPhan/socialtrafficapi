@@ -152,4 +152,9 @@ class Common
     public $PUSH_NOTIFICATION_SUCCESSULLY = 'User logout successfully';
     public $PUSH_NOTIFICATION_FAIL = 'User logout fail';
 
+    //login facebook
+    public $LOGIN_FACEBOOK_SUCCESSFULLY = "User login facebook successfully";
+    public $LOGIN_FACEBOOK_FAIL = "User login facebook fail";
+    public $LOGIN_FACEBOOK_ERROR_INPUT = "Error input";
+
 }

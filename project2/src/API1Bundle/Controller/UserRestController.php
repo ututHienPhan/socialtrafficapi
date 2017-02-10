@@ -28,13 +28,19 @@ class UserRestController extends Controller
             $infoUser = $response->get('Item');
             //phan can chinh sua
             $username = $infoUser['username']['S'];
-            $email = $infoUser['email']['S'];
-            $password = $infoUser['password']['S'];
+            $email = "";
+            $password = "";
             $address = "";
             $fullname = "";
             $gender = "";
             $phone = "";
             $avatar = "";
+            if(isset($infoUser['email'])){
+                $address = $infoUser['email']['S'];
+            }
+            if(isset($infoUser['password'])){
+                $address = $infoUser['password']['S'];
+            }
             if(isset($infoUser['address'])){
                 $address = $infoUser['address']['S'];
             }
@@ -195,6 +201,7 @@ class UserRestController extends Controller
         return $response;
     }
 
+    //api đăng xuất
     public function userLogoutAction() {
 
         $common = new Common();
@@ -221,5 +228,39 @@ class UserRestController extends Controller
             return $formatResponse->createResponseRegister($common->RESULT_CODE_SUCCESS, $common->USER_LOGOUT_SUCCESSULLY);
         }
 
+    }
+
+    //api đăng nhập bằng facebook
+    public function userLoginFacebookAction() {
+
+        $common = new Common();
+        $formatResponse = new FormatResponse();
+        $valid = new UserValidateHelper();
+
+        $tokenLogic = new TokenLogic($this->get('aws.dynamodb'));
+        $deviceTokenLogic = new DeviceTokenLogic($this->get('aws.dynamodb'));
+        $userLogic = new UserLogic($this->get('aws.dynamodb'));
+        $datas = $this->get('request')->getContent();
+        $array = json_decode($datas, true);
+        $token = $array["id"];
+        $username = $array["username"];
+        $tokendevice = $array["tokendevice"];
+        if(!$valid->validationIdToken($token) || !$valid->validationTokenDevice($tokendevice) || !$valid->validationUsername($username))
+            return $formatResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->LOGIN_FACEBOOK_ERROR_INPUT);
+        $user = $userLogic->getUserInfo($username);
+
+        if(!($user->get('Item')))
+        {
+            $result = $userLogic->insertNewUserFacebook($username);
+            if($result === FALSE) {
+                return $formatResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->LOGIN_FACEBOOK_FAIL);
+            }
+        }
+        $resultToken = $tokenLogic->insertNewToken($username, $token, date('Y-m-d H:i:s'));
+        $resultDeviceToken = $deviceTokenLogic->insertDeviceToken($username, $tokendevice);
+        if($resultToken === FALSE || $resultDeviceToken === FALSE) {
+            return $formatResponse->loginFacebookResponse($common->RESULT_CODE_FAIL, $common->LOGIN_FACEBOOK_FAIL, null, null);
+        }
+        return $formatResponse->loginFacebookResponse($common->RESULT_CODE_SUCCESS, $common->LOGIN_FACEBOOK_SUCCESSFULLY, $username, $token);
     }
 }

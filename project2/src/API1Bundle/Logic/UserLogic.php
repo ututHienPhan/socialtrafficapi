@@ -22,8 +22,13 @@ class UserLogic
         $user = $this->userRepository->findByEmail($email);
         return $user;
     }
-    public function insertNewUser($email, $username, $password /*, $fullname, $phonenumber, $address, $gender*/) {
-        $response = $this->userRepository->newAccount($email, $username, $password /*, $fullname, $phonenumber, $address, $gender*/);
+    public function insertNewUser($email, $username, $password) {
+        $response = $this->userRepository->newAccount($email, $username, $password);
+        return $response;
+    }
+
+    public function insertNewUserFacebook($username) {
+        $response = $this->userRepository->newAccountFacebook($username);
         return $response;
     }
 

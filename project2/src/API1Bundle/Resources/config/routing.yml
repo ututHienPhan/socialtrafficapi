@@ -114,6 +114,11 @@ api_user_logout:
     defaults:  { _controller: API1Bundle:UserRest:userLogout }
     methods: [POST]
 
+api_user_login_facebook:
+    path : /user/login/facebook
+    defaults:  { _controller: API1Bundle:UserRest:userLoginFacebook }
+    methods: [POST]
+
 api_test:
     path: /test
     defaults: { _controller: API1Bundle:ReportAccident:test}

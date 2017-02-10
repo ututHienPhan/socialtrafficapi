@@ -48,23 +48,29 @@ class UserRepository
 	}
 
 	// Tao tai khoan moi
-	public function newAccount($email, $username, $password /*, $fullname, $phonenumber, $address, $gender*/) {
+	public function newAccount($email, $username, $password) {
 		$response = $this->dynamodb->putItem([
 			'TableName' => $this->tableName,
 			'Item' => [
 				'email' => ['S'  => $email],
 				'username' => ['S'  => $username],
-				//'fullname' => ['S' =>  $fullname],
-				'password' => ['S'  => $password],
-				//'phonenumber' => ['S' => $phonenumber],
-				//'address' => ['S' => $address],
-				//'gender' => ['S' => $gender]
+				'password' => ['S'  => $password]
 			]
 		]);
 		return $response;
 	}
 
-	//update tai khoan
+        // Tao tai khoan login facebook
+    public function newAccountFacebook($username) {
+        $response = $this->dynamodb->putItem([
+            'TableName' => $this->tableName,
+            'Item' => [
+                'username' => ['S'  => $username]
+            ]
+        ]);
+        return $response;
+    }
+
     //update tai khoan
     public function updateUserInfo($fullname, $password, $email, $phone, $address, $gender, $username, $avatar)
     {
