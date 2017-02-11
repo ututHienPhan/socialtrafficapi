@@ -36,10 +36,10 @@ class UserRestController extends Controller
             $phone = "";
             $avatar = "";
             if(isset($infoUser['email'])){
-                $address = $infoUser['email']['S'];
+                $email = $infoUser['email']['S'];
             }
             if(isset($infoUser['password'])){
-                $address = $infoUser['password']['S'];
+                $password = $infoUser['password']['S'];
             }
             if(isset($infoUser['address'])){
                 $address = $infoUser['address']['S'];
@@ -245,13 +245,15 @@ class UserRestController extends Controller
         $token = $array["id"];
         $username = $array["username"];
         $tokendevice = $array["tokendevice"];
-        if(!$valid->validationIdToken($token) || !$valid->validationTokenDevice($tokendevice) || !$valid->validationUsername($username))
+        $fullname = $array["fullname"];
+        $avatar = $array["avatar"];
+        if(!$valid->validationIdToken($token) || !$valid->validationTokenDevice($tokendevice) || !$valid->validationUsername($username) || !$valid->validationFullname($fullname) || !$valid->validationAvatar($avatar))
             return $formatResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->LOGIN_FACEBOOK_ERROR_INPUT);
         $user = $userLogic->getUserInfo($username);
 
         if(!($user->get('Item')))
         {
-            $result = $userLogic->insertNewUserFacebook($username);
+            $result = $userLogic->insertNewUserFacebook($username, $fullname, $avatar);
             if($result === FALSE) {
                 return $formatResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->LOGIN_FACEBOOK_FAIL);
             }

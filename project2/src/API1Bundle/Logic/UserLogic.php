@@ -27,8 +27,8 @@ class UserLogic
         return $response;
     }
 
-    public function insertNewUserFacebook($username) {
-        $response = $this->userRepository->newAccountFacebook($username);
+    public function insertNewUserFacebook($username, $fullname, $avatar) {
+        $response = $this->userRepository->newAccountFacebook($username, $fullname, $avatar);
         return $response;
     }
 

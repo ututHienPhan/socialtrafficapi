@@ -60,7 +60,7 @@ class FormatResponse {
             'resultCode' => $resultCode,
             'resultMessage' => $resultMessage,
             'username'=> $username,
-            'token' => $token
+            'id' => $token
         );
         return $respone;
     }

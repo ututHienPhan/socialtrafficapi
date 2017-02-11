@@ -61,11 +61,13 @@ class UserRepository
 	}
 
         // Tao tai khoan login facebook
-    public function newAccountFacebook($username) {
+    public function newAccountFacebook($username, $fullname, $avatar) {
         $response = $this->dynamodb->putItem([
             'TableName' => $this->tableName,
             'Item' => [
-                'username' => ['S'  => $username]
+                'username' => ['S'  => $username],
+                'fullname' => ['S' => $fullname],
+                'avatar' => ['S' => $avatar]
             ]
         ]);
         return $response;
