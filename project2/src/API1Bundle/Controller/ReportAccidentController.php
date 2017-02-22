@@ -18,6 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use API1Bundle\FormatResponse\FormatResponse;
 use API1Bundle\Utils\UserValidateHelper;
 use Symfony\Component\Validator\Constraints\Count;
+use API1Bundle\Reference\Reference;
 
 class ReportAccidentController extends Controller {
 
@@ -194,25 +195,9 @@ class ReportAccidentController extends Controller {
 
     public function testAction()
     {
-        // get the mailer first (mandatory to initialize Swift Mailer)
-       /* $mailer = $this->get('mailer');
 
-        $message = \Swift_Message::newInstance()
-            ->setSubject('Hello Email')
-            ->setFrom('warningtravelcity@gmail.com')
-            ->setTo('hien4687@gmail.com')
-            ->setBody('hello', array('name' => 'hien de thuong'))
-        ;
-        $mailer->send($message);
-        return "yes"; */
-
-        $motoLogic = new MotoLogic($this->get('aws.dynamodb'));
-        $reportaccidentlogic = new ReportAccidentLogic($this->get('aws.dynamodb'));
-        $licenseplate = '77D1 188.34';
-        $arrUser = $motoLogic->getUsernames($licenseplate);
-        $result = $reportaccidentlogic->pushNotify($licenseplate, $arrUser);
-        return $result;
-
+        $ref = new Reference();
+       return $ref->getDistanceBetweenPointsNew(10.7627, 106.682, 10.7594, 106.6744);
     }
 
 }

@@ -40,9 +40,9 @@ class FireLogic
         } else if ($fire->get('Count') <= 0) {
             return null;
         }
-        $numberAcc = $fire->get('Count');
+        $numberFire = $fire->get('Count');
         $result = array();
-        for ($i = 0; $i < $numberAcc; $i++) {
+        for ($i = 0; $i < $numberFire; $i++) {
             $latitudeA = $fire->get('Items')[$i]['latitude']['N'];
             $longitudeA = $fire->get('Items')[$i]['longitude']['N'];
             $ref = new Reference();
