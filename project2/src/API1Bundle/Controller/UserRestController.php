@@ -11,6 +11,7 @@ use API1Bundle\FormatResponse\FormatResponse;
 use API1Bundle\Utils\UserValidateHelper;
 use API1Bundle\Logic\DeviceTokenLogic;
 use Symfony\Component\Config\Definition\Exception\Exception;
+use FOS\RestBundle\View\View;
 
 class UserRestController extends Controller
 {
@@ -68,7 +69,9 @@ class UserRestController extends Controller
                         'avatar' => $avatar
                      ];
             // phan can chinh sua
-            return $formatResponse->updateInfoResponse($common->RESULT_CODE_SUCCESS, $common->GET_INFO_USER_SUCCESSULLY, $user);
+            $view = View::create();
+            $view->setData($formatResponse->updateInfoResponse($common->RESULT_CODE_SUCCESS, $common->GET_INFO_USER_SUCCESSULLY, $user))->setStatusCode(200)->setHeader('Access-Control-Allow-Origin','*');
+            return $view;
 
         }
         return $formatResponse->updateInfoResponse($common->RESULT_CODE_FAIL, $common->GET_INFO_USER_ERROR_NOT_FOUND, null);

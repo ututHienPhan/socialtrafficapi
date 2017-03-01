@@ -99,4 +99,10 @@ class AccidentLogic
 
     }
 
+    //thong ke tai nan
+    public function AccidentStatistical($date){
+        $response = $this->accidentRepository->AccidentStatistical($date);
+        return $response;
+    }
+
 }

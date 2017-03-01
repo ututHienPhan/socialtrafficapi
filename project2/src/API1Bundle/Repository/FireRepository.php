@@ -138,5 +138,20 @@ class FireRepository
         return $response;
     }
 
+    //thong ke hoa hoan
+    public function FireStatistical($date){
+        $response = $this->dynamodb->scan(array(
+            'TableName' => $this->tableName
+        ));
 
+        $count = $response->get('Count');
+        $statistical_date = array();
+        for ($i = 0; $i < $count; $i++) {
+            $timestart = $response->get('Items')[$i]['timestart']['S'];
+            if(strpos($timestart, $date) !== false){
+                array_push($statistical_date, $timestart);
+            }
+        }
+        return count($statistical_date);
+    }
 }

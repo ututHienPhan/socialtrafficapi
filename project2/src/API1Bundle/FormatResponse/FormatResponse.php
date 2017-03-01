@@ -83,4 +83,13 @@ class FormatResponse {
         );
         return $respone;
     }
+
+    public function getResultStatistical($resultCode, $resultMessage, $data){
+        $response = array(
+            'resultCode' => $resultCode,
+            'resultMessage' => $resultMessage,
+            'Count' => $data
+        );
+        return $response;
+    }
 }

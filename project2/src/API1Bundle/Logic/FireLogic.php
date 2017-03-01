@@ -90,4 +90,9 @@ class FireLogic
         return $reponse->get('Items');
     }
 
+    //thong ke hoa hoan
+    public function FireStatistical($date){
+        $response = $this->fireRepository->FireStatistical($date);
+        return $response;
+    }
 }

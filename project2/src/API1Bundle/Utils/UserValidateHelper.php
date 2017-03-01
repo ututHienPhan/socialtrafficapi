@@ -8,6 +8,8 @@
 namespace API1Bundle\Utils;
 
 use API1Bundle\Common\Common;
+use \DateTime;
+
 
 class UserValidateHelper
 {
@@ -182,6 +184,31 @@ class UserValidateHelper
     //token device
     public function validationTokenDevice($tokendevice){
         if(($tokendevice === NULL) || (!is_string($tokendevice)))
+            return false;
+        return true;
+    }
+
+    //date validation
+    public function validationDate($date){
+        if(($date === NULL) || preg_match('/[A-Za-z]/', $date) ||
+            !strtotime($date) || DateTime::createFromFormat('Y/m/d', $date) == FALSE)
+            return false;
+        return true;
+    }
+
+    //month validation
+    public function validationMonth($month){
+        if(($month === NULL) || preg_match('/[A-Za-z]/', $month) || DateTime::createFromFormat('Y/m', $month) == FALSE)
+            return false;
+        $myArray = explode('/', $month);
+        if($myArray[1] < '1' || $myArray[1] > '12')
+            return false;
+        return true;
+    }
+
+    //year validation
+    public function validationYear($year){
+        if(($year === NULL) || preg_match('/[A-Za-z]/', $year) || DateTime::createFromFormat('Y', $year) == FALSE)
             return false;
         return true;
     }

@@ -16,7 +16,7 @@ use API1Bundle\Logic\TokenLogic;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use API1Bundle\FormatResponse\FormatResponse;
 use API1Bundle\Utils\UserValidateHelper;
-
+use FOS\RestBundle\View\View;
 class AccidentRestController extends Controller {
 
 
@@ -60,14 +60,24 @@ class AccidentRestController extends Controller {
         $longitude = $array["longitude"];
         $distance = $array["distance"];
         if(!$valid->validationLatitude($latitude) || !$valid->validationLongitude($longitude) || !$valid->validationDistance($distance)) {
-            return $formatResponse->updateInfoResponse($common->RESULT_CODE_FAIL, $common->GET_ACCIDENTS_LOCAL_ERROR_REQUEST, null);
+            $view = View::create();
+            $view->setData($formatResponse->updateInfoResponse($common->RESULT_CODE_FAIL, $common->GET_ACCIDENTS_LOCAL_ERROR_REQUEST, null))->setStatusCode(200)->setHeader('Access-Control-Allow-Origin','*');
+            return $view;
         }
         $respone = $accidentLogic->getAccidentsLocal($latitude, $longitude, $distance);
-        if($respone === FALSE)
-            return $formatResponse->updateInfoResponse($common->RESULT_CODE_FAIL, $common->GET_ACCIDENTS_LOCAL_FAIL, null);
-        if($respone === null)
-            return $formatResponse->updateInfoResponse($common->RESULT_CODE_FAIL, $common->GET_ACCIDENTS_LOCAL_ERROR_NOT_FOUND, null);
-        return $formatResponse->updateInfoResponse($common->RESULT_CODE_SUCCESS, $common->GET_ACCIDENTS_LOCAL_SUCCESSULLY, $respone);
+        if($respone === FALSE) {
+            $view = View::create();
+            $view->setData($formatResponse->updateInfoResponse($common->RESULT_CODE_FAIL, $common->GET_ACCIDENTS_LOCAL_FAIL, null))->setStatusCode(200)->setHeader('Access-Control-Allow-Origin','*');
+            return $view;
+        }
+        if($respone === null) {
+            $view = View::create();
+            $view->setData($formatResponse->updateInfoResponse($common->RESULT_CODE_FAIL, $common->GET_ACCIDENTS_LOCAL_ERROR_NOT_FOUND, null))->setStatusCode(200)->setHeader('Access-Control-Allow-Origin','*');
+            return $view;
+        }
+        $view = View::create();
+        $view->setData($formatResponse->updateInfoResponse($common->RESULT_CODE_SUCCESS, $common->GET_ACCIDENTS_LOCAL_SUCCESSULLY, $respone))->setStatusCode(200)->setHeader('Access-Control-Allow-Origin','*');
+         return $view;
     }
 
     //get do tin cay cua thong tin tai nan
@@ -138,6 +148,56 @@ class AccidentRestController extends Controller {
         }
     }
 
+    //thong ke tai nan theo ngay
+    public function accidentStatisticalByDateAction(){
+        $accidentLogic = new AccidentLogic($this->get('aws.dynamodb'));
+        $common = new Common();
+        $formatResponse = new FormatResponse();
+        $valid = new UserValidateHelper();
+        $date = date('Y/m/d');
+        if(!$valid->validationDate($date)){
+            $view = View::create();
+            $view->setData($formatResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->STATISTICAL_BY_DATE_ERROR_REQUEST))->setStatusCode(200)->setHeader('Access-Control-Allow-Origin','*');
+            return $view;
+        }
+        $response = $accidentLogic->AccidentStatistical($date);
+        $view = View::create();
+        $view->setData($formatResponse->getResultStatistical($common->RESULT_CODE_SUCCESS, $common->STATISTICAL_BY_DATE_SUCCESSFULLY, $response))->setStatusCode(200)->setHeader('Access-Control-Allow-Origin','*');
+            return $view;
+    }
 
+    //thong ke tai nan theo thang
+    public function accidentStatisticalByMonthAction(){
+        $accidentLogic = new AccidentLogic($this->get('aws.dynamodb'));
+        $common = new Common();
+        $formatResponse = new FormatResponse();
+        $valid = new UserValidateHelper();
+        $month = date('Y/m');
+        if(!$valid->validationMonth($month)){
+            $view = View::create();
+            $view->setData($formatResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->STATISTICAL_BY_MONTH_ERROR_REQUEST))->setStatusCode(200)->setHeader('Access-Control-Allow-Origin','*');
+        }
+        $response = $accidentLogic->AccidentStatistical($month);
+        $view = View::create();
+        $view->setData($formatResponse->getResultStatistical($common->RESULT_CODE_SUCCESS, $common->STATISTICAL_BY_MONTH_SUCCESSFULLY, $response))->setStatusCode(200)->setHeader('Access-Control-Allow-Origin','*');
+        return $view;
+    }
 
+    //thong ke tai nan theo nam
+    public function accidentStatisticalByYearAction(){
+        $accidentLogic = new AccidentLogic($this->get('aws.dynamodb'));
+        $common = new Common();
+        $formatResponse = new FormatResponse();
+        $valid = new UserValidateHelper();
+        $year = date('Y');
+        if(!$valid->validationYear($year)){
+            $view = View::create();
+            $view->setData($formatResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->STATISTICAL_BY_YEAR_ERROR_REQUEST))->setStatusCode(200)->setHeader('Access-Control-Allow-Origin','*');
+            return $view;
+        }
+        $response = $accidentLogic->AccidentStatistical($year);
+        $view = View::create();
+        $view->setData($formatResponse->getResultStatistical($common->RESULT_CODE_SUCCESS, $common->STATISTICAL_BY_YEAR_SUCCESSFULLY, $response))->setStatusCode(200)->setHeader('Access-Control-Allow-Origin','*');
+        return $view;
+    }
 }

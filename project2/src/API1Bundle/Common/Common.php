@@ -157,4 +157,16 @@ class Common
     public $LOGIN_FACEBOOK_FAIL = "User login facebook fail";
     public $LOGIN_FACEBOOK_ERROR_INPUT = "Error input";
 
+    //thong ke
+    public $STATISTICAL_BY_DATE_SUCCESSFULLY = "Statistical by date successfully";
+    public $STATISTICAL_BY_DATE_FAIL = "Statistical by date fail";
+    public $STATISTICAL_BY_DATE_ERROR_REQUEST = "Error input";
+
+    public $STATISTICAL_BY_MONTH_SUCCESSFULLY = "Statistical by month successfully";
+    public $STATISTICAL_BY_MONTH_FAIL = "Statistical by month fail";
+    public $STATISTICAL_BY_MONTH_ERROR_REQUEST = "Error input";
+
+    public $STATISTICAL_BY_YEAR_SUCCESSFULLY = "Statistical by year successfully";
+    public $STATISTICAL_BY_YEAR_FAIL = "Statistical by year fail";
+    public $STATISTICAL_BY_YEAR_ERROR_REQUEST = "Error input";
 }

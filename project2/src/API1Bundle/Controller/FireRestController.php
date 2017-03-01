@@ -89,4 +89,58 @@ class FireRestController extends Controller
         return $formatResponse->getResultEvaluateAccurateAccident($common->RESULT_CODE_SUCCESS, $common->EVALUATE_ACCURATE_FIRE_SUCCESSFULLY, $response);
 
     }
+
+    //thong ke hoa hoan theo ngay
+    public function fireStatisticalByDateAction(){
+        $fireLogic = new FireLogic($this->get('aws.dynamodb'));
+        $common = new Common();
+        $formatResponse = new FormatResponse();
+        $valid = new UserValidateHelper();
+        $date = date('Y/m/d');
+        if(!$valid->validationDate($date)){
+            $view = View::create();
+            $view->setData($formatResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->STATISTICAL_BY_DATE_ERROR_REQUEST))->setStatusCode(200)->setHeader('Access-Control-Allow-Origin','*');
+            return $view;
+        }
+        $response = $fireLogic->FireStatistical($date);
+        $view = View::create();
+        $view->setData($formatResponse->getResultStatistical($common->RESULT_CODE_SUCCESS, $common->STATISTICAL_BY_DATE_SUCCESSFULLY, $response))->setStatusCode(200)->setHeader('Access-Control-Allow-Origin','*');
+        return $view;
+    }
+
+    //thong ke hoa hoan theo thang
+    public function fireStatisticalByMonthAction(){
+        $fireLogic = new FireLogic($this->get('aws.dynamodb'));
+        $common = new Common();
+        $formatResponse = new FormatResponse();
+        $valid = new UserValidateHelper();
+        $month = date('Y/m');
+        if(!$valid->validationMonth($month)){
+            $view = View::create();
+            $view->setData($formatResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->STATISTICAL_BY_MONTH_ERROR_REQUEST))->setStatusCode(200)->setHeader('Access-Control-Allow-Origin','*');
+            return $view;
+        }
+        $response = $fireLogic->FireStatistical($month);
+         $view = View::create();
+            $view->setData($formatResponse->getResultStatistical($common->RESULT_CODE_SUCCESS, $common->STATISTICAL_BY_MONTH_SUCCESSFULLY, $response))->setStatusCode(200)->setHeader('Access-Control-Allow-Origin','*');
+            return $view;
+    }
+
+    //thong ke hoa hoan theo nam
+    public function fireStatisticalByYearAction(){
+        $fireLogic = new FireLogic($this->get('aws.dynamodb'));
+        $common = new Common();
+        $formatResponse = new FormatResponse();
+        $valid = new UserValidateHelper();
+        $year = date('Y');
+        if(!$valid->validationYear($year)){
+            $view = View::create();
+            $view->setData($formatResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->STATISTICAL_BY_YEAR_ERROR_REQUEST))->setStatusCode(200)->setHeader('Access-Control-Allow-Origin','*');
+            return $view;
+        }
+        $response = $fireLogic->FireStatistical($year);
+        $view = View::create();
+        $view->setData($formatResponse->getResultStatistical($common->RESULT_CODE_SUCCESS, $common->STATISTICAL_BY_YEAR_SUCCESSFULLY, $response))->setStatusCode(200)->setHeader('Access-Control-Allow-Origin','*');
+        return $view;
+    }
 }
