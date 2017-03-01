@@ -163,10 +163,44 @@ class FireRepository
         for($i = 1; $i < 7; $i++)
         {
             //$strdate = $i;
-            $date = date('Y/m/d', strtotime('-'.$i.' days'));
-            $result[$i]['date'] = $date;
-            $result[$i]['count'] = $this->FireStatistical($date);
+            $date1 = date('Y/m/d', strtotime('-'.$i.' days', strtotime($date)));
+            $result[$i]['date'] = $date1;
+            $result[$i]['count'] = $this->FireStatistical($date1);
         }
         return $result;
+    }
+
+    //thong ke hoa hoan trong 4 tuan
+    public function FireStatisticalin4Week($week){
+        ini_set('max_execution_time', 300);
+        $week_array = array();
+        for($i = 0; $i < 4; $i++){
+            $date1 = date('Y/m/d', strtotime('-6 days', strtotime($week)));
+            $str = $date1.'-'.$week;
+            $week_array[$i]['week'] = $str;
+            $week_array[$i]['count'] = 0;
+            $week_count = $this->FireStatisticalinWeek($week);
+            $sum = 0;
+            foreach($week_count as $item) {
+                $sum += $item['count'];
+            }
+            $week_array[$i]['count'] = $sum;
+            $week = date('Y/m/d', strtotime('-1 days', strtotime($date1)));
+        }
+        return $week_array;
+    }
+
+    //thong ke hoa hoan trong nua nam
+    public function FireStatisticalinYear($date){
+        $month_array = array();
+        $month = date('Y/m', strtotime($date));
+        $month_array[0]['month'] = $month;
+        $month_array[0]['count'] = $this->FireStatistical($month);
+        for($i = 1; $i < 6; $i++){
+            $month = date('Y/m', strtotime($date.' -'.$i.' month'));
+            $month_array[$i]['month'] = $month;
+            $month_array[$i]['count'] = $this->FireStatistical($month);
+        }
+        return $month_array;
     }
 }

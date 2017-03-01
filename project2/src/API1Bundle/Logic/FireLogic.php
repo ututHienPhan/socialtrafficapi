@@ -101,4 +101,16 @@ class FireLogic
         $result = $this->fireRepository->FireStatisticalinWeek($date);
         return $result;
     }
+
+    //thong ke hoa hoan 4 tuan
+    public function FireStatistical4Week($date){
+        $result = $this->fireRepository->FireStatisticalin4Week($date);
+        return $result;
+    }
+
+    //thong ke hoa hoan trong 6 thang
+    public function FireStatistical6Month($date){
+        $result = $this->fireRepository->FireStatisticalinYear($date);
+        return $result;
+    }
 }

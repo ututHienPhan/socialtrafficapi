@@ -105,4 +105,21 @@ class AccidentLogic
         return $response;
     }
 
+    //thong ke tai nan 7 ngay
+    public function AccidentStatisticalbyWeek($date){
+        $result = $this->accidentRepository->AccidentStatisticalinWeek($date);
+        return $result;
+    }
+
+    //thong ke tai nan 4 tuan
+    public function AccidentStatistical4Week($date){
+        $result = $this->accidentRepository->AccidentStatisticalin4Week($date);
+        return $result;
+    }
+
+    //thong ke tai nan trong 6 thang
+    public function AccidentStatistical6Month($date){
+        $result = $this->accidentRepository->AccidentStatisticalinYear($date);
+        return $result;
+    }
 }

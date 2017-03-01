@@ -123,32 +123,27 @@ api_test:
     path: /test
     defaults: { _controller: API1Bundle:ReportAccident:test}
     methods: [GET]
-api_fire_statistical_by_date:
-    path: /fire/statistical/date
-    defaults: {_controller: API1Bundle:FireRest:fireStatisticalByDate}
+api_statistical_by_date:
+    path: /statistical/date
+    defaults: {_controller: API1Bundle:WebRest:StatisticalByDate}
     methods: [GET]
-api_fire_statistical_by_month:
-    path: /fire/statistical/month
-    defaults: {_controller: API1Bundle:FireRest:fireStatisticalByMonth}
+api_statistical_by_month:
+    path: /statistical/month
+    defaults: {_controller: API1Bundle:WebRest:StatisticalByMonth}
     methods: [GET]
-api_fire_statistical_by_year:
-    path: /fire/statistical/year
-    defaults: {_controller: API1Bundle:FireRest:fireStatisticalByYear}
+api_statistical_by_year:
+    path: /statistical/year
+    defaults: {_controller: API1Bundle:WebRest:StatisticalByYear}
     methods: [GET]
-api_accident_statistical_by_date:
-    path: /accident/statistical/date
-    defaults: {_controller: API1Bundle:AccidentRest:accidentStatisticalByDate}
+api_statistical_by_week:
+    path: /statistical/week
+    defaults: {_controller: API1Bundle:WebRest:StatisticalByWeek}
     methods: [GET]
-api_accident_statistical_by_month:
-    path: /accident/statistical/month
-    defaults: {_controller: API1Bundle:AccidentRest:accidentStatisticalByMonth}
+api_statistical_by_4week:
+    path: /statistical/four_week
+    defaults: {_controller: API1Bundle:WebRest:StatisticalBy4Week}
     methods: [GET]
-api_accident_statistical_by_year:
-    path: /accident/statistical/year
-    defaults: {_controller: API1Bundle:AccidentRest:accidentStatisticalByYear}
+api_statistical_by_6month:
+    path: /statistical/six_month
+    defaults: {_controller: API1Bundle:WebRest:StatisticalBy6Month}
     methods: [GET]
-api_fire_statistical_week:
-    path: /fire/statistical/week
-    defaults: {_controller: API1Bundle:FireRest:FireStatisticalByWeek}
-    methods: [GET]
-
