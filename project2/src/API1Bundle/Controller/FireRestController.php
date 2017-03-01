@@ -56,14 +56,24 @@ class FireRestController extends Controller
         $longitude = $array["longitude"];
         $distance = $array["distance"];
         if (!$valid->validationLatitude($latitude) || !$valid->validationLongitude($longitude) || !$valid->validationDistance($distance)) {
-            return $formatResponse->reportFireResponse($common->RESULT_CODE_FAIL, $common->GET_FIRE_LOCAL_ERROR_REQUEST, null);
+            $view = View::create();
+            $view->setData($formatResponse->reportFireResponse($common->RESULT_CODE_FAIL, $common->GET_FIRE_LOCAL_ERROR_REQUEST, null))->setStatusCode(200)->setHeader('Access-Control-Allow-Origin','*');
+            return $view;
         }
         $respone = $fireLogic->getFireLocal($latitude, $longitude, $distance);
-        if ($respone === FALSE)
-            return $formatResponse->reportFireResponse($common->RESULT_CODE_FAIL, $common->GET_FIRE_LOCAL_FAIL, null);
-        if ($respone === null)
-            return $formatResponse->reportFireResponse($common->RESULT_CODE_FAIL, $common->GET_FIRE_LOCAL_ERROR_NOT_FOUND, null);
-        return $formatResponse->reportFireResponse($common->RESULT_CODE_SUCCESS, $common->GET_FIRE_LOCAL_SUCCESSULLY, $respone);
+        if ($respone === FALSE) {
+            $view = View::create();
+            $view->setData($formatResponse->reportFireResponse($common->RESULT_CODE_FAIL, $common->GET_FIRE_LOCAL_FAIL, null))->setStatusCode(200)->setHeader('Access-Control-Allow-Origin','*');
+            return $view;
+        }
+        if ($respone === null){
+            $view = View::create();
+            $view->setData($formatResponse->reportFireResponse($common->RESULT_CODE_FAIL, $common->GET_FIRE_LOCAL_ERROR_NOT_FOUND, null))->setStatusCode(200)->setHeader('Access-Control-Allow-Origin','*');
+            return $view;
+        }
+        $view = View::create();
+        $view->setData($formatResponse->reportFireResponse($common->RESULT_CODE_SUCCESS, $common->GET_FIRE_LOCAL_SUCCESSULLY, $respone))->setStatusCode(200)->setHeader('Access-Control-Allow-Origin','*');
+        return $view;
     }
 
     //get do tin cay cua thong tin hoa hoan
