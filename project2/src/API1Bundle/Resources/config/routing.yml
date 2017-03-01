@@ -147,3 +147,8 @@ api_accident_statistical_by_year:
     path: /accident/statistical/year
     defaults: {_controller: API1Bundle:AccidentRest:accidentStatisticalByYear}
     methods: [GET]
+api_fire_statistical_week:
+    path: /fire/statistical/week
+    defaults: {_controller: API1Bundle:FireRest:FireStatisticalByWeek}
+    methods: [GET]
+

@@ -95,4 +95,10 @@ class FireLogic
         $response = $this->fireRepository->FireStatistical($date);
         return $response;
     }
+
+    //thong ke hoa hoan 7 ngay
+    public function FireStatisticalbyWeek($date){
+        $result = $this->fireRepository->FireStatisticalinWeek($date);
+        return $result;
+    }
 }

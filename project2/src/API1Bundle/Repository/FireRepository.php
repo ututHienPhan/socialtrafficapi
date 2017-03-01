@@ -154,4 +154,19 @@ class FireRepository
         }
         return count($statistical_date);
     }
+
+    //thong ke hoa hoan trong 7 ngay
+    public function FireStatisticalinWeek($date){
+        $result = array();
+        $result[0]['date'] = $date;
+        $result[0]['count'] = $this->FireStatistical($date);
+        for($i = 1; $i < 7; $i++)
+        {
+            //$strdate = $i;
+            $date = date('Y/m/d', strtotime('-'.$i.' days'));
+            $result[$i]['date'] = $date;
+            $result[$i]['count'] = $this->FireStatistical($date);
+        }
+        return $result;
+    }
 }

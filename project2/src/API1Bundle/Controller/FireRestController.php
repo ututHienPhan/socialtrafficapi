@@ -153,4 +153,20 @@ class FireRestController extends Controller
         $view->setData($formatResponse->getResultStatistical($common->RESULT_CODE_SUCCESS, $common->STATISTICAL_BY_YEAR_SUCCESSFULLY, $response))->setStatusCode(200)->setHeader('Access-Control-Allow-Origin','*');
         return $view;
     }
+
+    //thong ke hoa hoan theo tuan
+    public function FireStatisticalByWeekAction(){
+        $fireLogic = new FireLogic($this->get('aws.dynamodb'));
+        $common = new Common();
+        $formatResponse = new FormatResponse();
+        $valid = new UserValidateHelper();
+        $date = date('Y/m/d', time());
+        if(!$valid->validationDate($date)){
+            return $formatResponse->createResponseRegister($common->RESULT_CODE_FAIL, $common->STATISTICAL_BY_WEEK_ERROR_REQUEST);
+        }
+        $response = $fireLogic->FireStatisticalbyWeek($date);
+        $view = View::create();
+        $view->setData($formatResponse->getResultStatistical($common->RESULT_CODE_SUCCESS, $common->STATISTICAL_BY_WEEK_SUCCESSFULLY, $response))->setStatusCode(200)->setHeader('Access-Control-Allow-Origin','*');
+        return $view;
+    }
 }

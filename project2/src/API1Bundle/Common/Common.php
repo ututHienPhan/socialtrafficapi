@@ -169,4 +169,8 @@ class Common
     public $STATISTICAL_BY_YEAR_SUCCESSFULLY = "Statistical by year successfully";
     public $STATISTICAL_BY_YEAR_FAIL = "Statistical by year fail";
     public $STATISTICAL_BY_YEAR_ERROR_REQUEST = "Error input";
+    public $STATISTICAL_BY_WEEK_SUCCESSFULLY = "Statistical in 7 days successfully";
+    public $STATISTICAL_BY_WEEK_FAIL = "Statistical fail";
+    public $STATISTICAL_BY_WEEK_ERROR_REQUEST = "Error input";
+
 }
